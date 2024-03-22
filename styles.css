@@ -1,0 +1,212 @@
+body{
+    background-color: #D6CEBA;
+}
+.headerIntro{
+    font-size: 100px; 
+    color: #D6CEBA; 
+    background-color: #39241B;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    display: inline;
+    margin: 10px;
+    padding: 10px;
+}
+
+.header2Intro{
+    font-size: 50px;
+    color: #D6CEBA;
+    background-color: #D6CEBA;
+    font-family: 'Roboto Condensed', sans-serif;
+    -webkit-text-stroke-width: 1px ;
+    -webkit-text-stroke-color: #39241B;
+    margin: 5px;
+    padding: 10px;
+}
+
+
+
+.menuButton {
+    margin-top: 250px;
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 750;
+    font-size: 70px;
+    padding: 0 70px;
+    line-height: 90px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .menuButton:hover {
+    transform: scale(1.05);;
+  }
+  
+  .menuButton:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+
+  .div1{
+    margin: 10px;
+    text-align: center;
+    float:left;
+  }
+  .div2{
+    margin: 10px;
+    text-align: center;
+  }
+
+
+  .logo1{
+    margin-right: 100px;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    float: right;
+  }
+
+  .dot img {
+    border: 2px solid #D6CEBA;
+    border-radius: 30px;
+    box-shadow: #39241B 4px 4px 0 0;
+    width: 300px;
+    height: 480px;
+}
+
+.containerMenu{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.containerTakeOut {
+    margin-top: -250px;
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    color: #D6CEBA;
+    display: none;
+    position: absolute;
+    background-color: #422800;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content p {
+    padding: 10px;
+    margin: 0;
+}
+
+/* Add this CSS to your styles.css file */
+
+/* Newspaper style for dropdown content */
+.dropdown-content ul {
+    column-count: 3; /* Adjust the number of columns as needed */
+    column-gap: 40px; /* Adjust the gap between columns as needed */
+    padding-left: 20px; /* Add left padding to align the text properly */
+}
+
+.dropdown-content ul li {
+    margin-bottom: 10px; /* Add space between list items */
+    padding-left: 10px; /* Add left padding for indentation */
+    border-left: 2px solid #ccc; /* Add left border for newspaper style */
+}
+
+.dropdown-content ul li:last-child {
+    margin-bottom: 0; /* Remove margin for the last list item */
+}
+
+/* Hover effect */
+.dropdown-content ul li:hover {
+    transform: scale(1.05);; /* Change background color on hover */
+}
+
+.takeOutButton {
+    width: 500px;
+    margin-top: 250px;
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 750;
+    font-size: 40px;
+    padding: 0 70px;
+    line-height: 70px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .takeOutButton:hover {
+    transform: scale(1.05);
+  }
+  
+  .takeOutButton:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+
+  .containerDineIn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.containerDineIn > div {
+    margin: 10px;
+    text-align: center;
+}
+
+.containerDineIn img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.containerDineIn img:hover {
+    transform: scale(1.05);
+}
+
+.foodDescription {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.quantitySelector {
+    margin-top: 10px;
+}
+
+.totalAmount {
+    font-weight: bold;
+    margin-top: 10px;
+}
