@@ -180,6 +180,7 @@ body{
     justify-content: center;
 }
 
+
 .containerDineIn > div {
     margin: 10px;
     text-align: center;
@@ -197,13 +198,57 @@ body{
     transform: scale(1.05);
 }
 
+
 .foodDescription {
     font-size: 14px;
     margin-top: 5px;
 }
 
+.quantitySelector button {
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 3px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    cursor: pointer;
+    font-weight: 750;
+    font-size: 16px;
+    padding: 6px 12px;
+    transition: transform 0.3s ease;
+}
+
+.quantitySelector button:hover {
+    background-color: #422800;
+    color: #fbeee0;
+    transform: scale(1.05);
+}
+
+.quantitySelector button:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+}
+
+
+.decrement {
+    float: left;
+    margin-right: 5px;
+}
+
+.increment {
+    float: right;
+    margin-left: 5px;
+}
+
 .quantitySelector {
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.quantity {
+    /* Add your styles for the quantity here */
+    font-size: 16px;
+    width: 30px; /* Adjust width as needed */
+    text-align: center;
 }
 
 .totalAmount {
@@ -268,13 +313,6 @@ button:hover {
 }
 
 
-body {
-    font-family: 'Roboto Condensed', sans-serif;
-    color: #39241B; 
-    background-color: #D6CEBA;
-    margin: 0;
-    padding: 0;
-}
 
 header {
     background-color: #39241B;
@@ -326,3 +364,23 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.drinkOption {
+    margin-top: 100px;
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 750;
+    font-size: 70px;
+    padding: 0 70px;
+    line-height: 90px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
