@@ -12,20 +12,45 @@
         <h2 class="header2Intro">음료를 선택하세요</h2>
     </div>
     <div class="containerMenu">
-        <div class="drinksSection">
-            <a href="coke.html" class="drinkOption">
-                <p>Coke</p>
-            </a>
-            <a href="royal.html" class="drinkOption">
-                <p>Royal</p>
-            <a href="water.html" class="drinkOption">
-                <p>Water</p>
-            </a>
-            <a href="nestea.html" class="drinkOption">
-                <p>Nestea</p>
-            </a>
-        </div>
+        <form id="drinkForm">
+            <div class="drinksSection">
+                <div class="drinkOption">
+                    <label for="coke">Coke</label>
+                    <input type="number" id="cokeQuantity" name="cokeQuantity" min="0" max="10" value="0">
+                </div>
+                <div class="drinkOption">
+                    <label for="royal">Royal</label>
+                    <input type="number" id="royalQuantity" name="royalQuantity" min="0" max="10" value="0">
+                </div>
+                <div class="drinkOption">
+                    <label for="water">Water</label>
+                    <input type="number" id="waterQuantity" name="waterQuantity" min="0" max="10" value="0">
+                </div>
+                <div class="drinkOption">
+                    <label for="nestea">Nestea</label>
+                    <input type="number" id="nesteaQuantity" name="nesteaQuantity" min="0" max="10" value="0">
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
     </div>
+
+    <script>
+        document.getElementById("drinkForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var selectedDrinks = [];
+            var quantities = [];
+            var drinks = ["coke", "royal", "water", "nestea"];
+            drinks.forEach(function(drink) {
+                var quantityInput = document.getElementById(drink + "Quantity");
+                var quantity = parseInt(quantityInput.value);
+                if (quantity > 0) {
+                    selectedDrinks.push(drink.charAt(0).toUpperCase() + drink.slice(1) + " (Quantity: " + quantity + ")");
+                }
+            });
+            alert("You selected: " + selectedDrinks.join(", "));
+            // You can perform further actions with the selected drinks here
+        });
+    </script>
 </body>
 </html>
-

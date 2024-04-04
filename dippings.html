@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Dipping Sauces</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .foodOption label {
+            font-size: 1.7em; /* Adjust font size as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="div2">
+        <h1 class="headerIntro">Choose Your Dipping Sauces</h1>
+        <h2 class="header2Intro">소스 선택</h2>
+    </div>
+
+    <form id="dippingSauceForm">
+        <div class="foodOption">
+            <input type="checkbox" id="cheese" name="dippingSauce" value="Cheese Dip">
+            <label for="cheese">Cheese Dip</label>
+            <input type="number" id="cheeseQuantity" name="cheeseQuantity" min="1" max="10" value="1">
+        </div>
+        <div class="foodOption">
+            <input type="checkbox" id="ssamjang" name="dippingSauce" value="Ssamjang">
+            <label for="ssamjang">Ssamjang</label>
+            <input type="number" id="ssamjangQuantity" name="ssamjangQuantity" min="1" max="10" value="1">
+        </div>
+        <div class="foodOption">
+            <input type="checkbox" id="sesameOilSalt" name="dippingSauce" value="Sesame Oil/Salt">
+            <label for="sesameOilSalt">Sesame Oil/Salt</label>
+            <input type="number" id="sesameOilSaltQuantity" name="sesameOilSaltQuantity" min="1" max="10" value="1">
+        </div>
+        <div class="foodOption">
+            <input type="checkbox" id="lettuce" name="dippingSauce" value="Lettuce Wrap">
+            <label for="lettuce">Lettuce Wrap</label>
+            <input type="number" id="lettuceQuantity" name="lettuceQuantity" min="1" max="10" value="1">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("dippingSauceForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var selectedDippingSauces = [];
+            var checkboxes = document.getElementsByName("dippingSauce");
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    var sauceName = checkbox.value;
+                    var quantityInput = document.getElementById(sauceName.replace(/\s+/g, '') + "Quantity");
+                    var quantity = parseInt(quantityInput.value);
+                    selectedDippingSauces.push(sauceName + " (Quantity: " + quantity + ")");
+                }
+            });
+            alert("You selected: " + selectedDippingSauces.join(", "));
+            
+        });
+    </script>
+</body>
+</html>

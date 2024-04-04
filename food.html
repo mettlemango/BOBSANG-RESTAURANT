@@ -9,21 +9,52 @@
 </head>
 <body>
     <div class="containerDineIn">
-        <div class="porkBelly">
-            <img src="images/porkbelly.jpg" alt="porkBelly">
-        </div>
-        <div class="spicyPorkBelly">
-            <img src="images/spicyporkbelly.jpg" alt="spicyPorkBelly">
-        </div>
-        <div class="galbiSauce">
-            <img src="images/galbiSauce.jpg" alt="galbiSauce">
-        </div>
-        <div class="beefBelly">
-            <img src="images/beefBelly.jpg" alt="beefBelly">
-        </div>
-        <div class="laGalbiBeef">
-            <img src="images/lagalbi.jpg" alt="lagalbi">
-        </div>
+        <h1 class="headerIntro"> Choose your Pork/Beef 고기 선택하세요</h1>
+        <form id="orderForm">
+            <div class="foodOption">
+                <label for="porkBelly">Pork Belly</label>
+                <input type="number" id="porkBellyQuantity" name="porkBellyQuantity" min="0" max="10" value="0">
+                <img src="images/porkbelly.jpg" alt="porkBelly">
+            </div>
+            <div class="foodOption">
+                <label for="spicyPorkBelly">Spicy Pork Belly</label>
+                <input type="number" id="spicyPorkBellyQuantity" name="spicyPorkBellyQuantity" min="0" max="10" value="0">
+                <img src="images/spicyporkbelly.jpg" alt="spicyPorkBelly">
+            </div>
+            <div class="foodOption">
+                <label for="galbiSauce">Galbi Sauce</label>
+                <input type="number" id="galbiSauceQuantity" name="galbiSauceQuantity" min="0" max="10" value="0">
+                <img src="images/galbiSauce.jpg" alt="galbiSauce">
+            </div>
+            <div class="foodOption">
+                <label for="beefBelly">Beef Belly</label>
+                <input type="number" id="beefBellyQuantity" name="beefBellyQuantity" min="0" max="10" value="0">
+                <img src="images/beefBelly.jpg" alt="beefBelly">
+            </div>
+            <div class="foodOption">
+                <label for="laGalbiBeef">LA Galbi Beef</label>
+                <input type="number" id="laGalbiBeefQuantity" name="laGalbiBeefQuantity" min="0" max="10" value="0">
+                <img src="images/lagalbi.jpg" alt="laGalbiBeef">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
     </div>
+
+    <script>
+        document.getElementById("orderForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var orderDetails = [];
+            var items = ["porkBelly", "spicyPorkBelly", "galbiSauce", "beefBelly", "laGalbiBeef"];
+            items.forEach(function(item) {
+                var quantityInput = document.getElementById(item + "Quantity");
+                var quantity = parseInt(quantityInput.value);
+                if (quantity > 0) {
+                    orderDetails.push(item.charAt(0).toUpperCase() + item.slice(1) + " (Quantity: " + quantity + ")");
+                }
+            });
+            alert("Your order: " + orderDetails.join(", "));
+            // You can perform further actions with the selected items here
+        });
+    </script>
 </body>
 </html>
