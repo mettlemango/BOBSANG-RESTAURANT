@@ -96,6 +96,9 @@ body{
     justify-content: space-evenly;
 }
 
+
+
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -143,6 +146,36 @@ body{
 .dropdown-content ul li:hover {
     transform: scale(1.05);; /* Change background color on hover */
 }
+
+.takeOutButton {
+    width: 500px;
+    margin-top: 250px;
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 750;
+    font-size: 40px;
+    padding: 0 70px;
+    line-height: 70px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .takeOutButton:hover {
+    transform: scale(1.05);
+  }
+  
+  .takeOutButton:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
 
 .takeOutButton {
     width: 500px;
@@ -254,6 +287,154 @@ body{
 .totalAmount {
     font-weight: bold;
     margin-top: 10px;
+}
+
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #D6CEBA; 
+    background-color: #39241B;
+    margin: 10px;
+    padding: 10px;
+    display: inline;
+}
+
+.loginIntro{
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #D6CEBA; 
+    background-color: #39241B;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fbeee0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hIntro{
+    font-size: 70px; 
+    color: #D6CEBA; 
+    background-color: #39241B;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    display: inline;
+    margin: 10px;
+    padding: 10px;
+}
+
+.h2Intro{
+    font-size: 30px;
+    color: #D6CEBA;
+    background-color: #D6CEBA;
+    font-family: 'Roboto Condensed', sans-serif;
+    -webkit-text-stroke-width: 1px ;
+    -webkit-text-stroke-color: #39241B;
+    margin: 5px;
+    padding: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #422800;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #422800;
+    border-radius: 3px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 3px;
+    box-shadow: #422800 4px 4px 0 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+button:hover {
+    background-color: #fbeee0;
+}
+
+.error-message {
+    color: #ff0000;
+}
+
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #39241B; 
+    background-color: #D6CEBA;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #39241B;
+    color: #D6CEBA;
+    padding: 20px;
+    text-align: center;
+}
+
+header a {
+    color: #D6CEBA;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+.reports-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fbeee0;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #D6CEBA;
+    text-align: left;
+}
+
+th {
+    background-color: #39241B;
+    color: #D6CEBA;
+}
+
+a {
+    color: #422800;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .loginIntro{

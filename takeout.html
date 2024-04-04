@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .dropdown-content {
+            display: none;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const setAQuantityInput = document.getElementById("setAQuantity");
+            const setBQuantityInput = document.getElementById("setBQuantity");
+            const shabuShabuQuantityInput = document.getElementById("shabuShabuQuantity");
+
+            const setAButton = document.querySelector(".dropdown:nth-child(1) .takeOutButton");
+            const setBButton = document.querySelector(".dropdown:nth-child(2) .takeOutButton");
+            const shabuShabuButton = document.querySelector(".dropdown:nth-child(3) .takeOutButton");
+
+            setAQuantityInput.addEventListener("input", function() {
+                setAButton.disabled = !(parseInt(setAQuantityInput.value) > 0);
+            });
+
+            setBQuantityInput.addEventListener("input", function() {
+                setBButton.disabled = !(parseInt(setBQuantityInput.value) > 0);
+            });
+
+            shabuShabuQuantityInput.addEventListener("input", function() {
+                shabuShabuButton.disabled = !(parseInt(shabuShabuQuantityInput.value) > 0);
+            });
+
+            const dropdownButtons = document.querySelectorAll(".takeOutButton");
+            dropdownButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    const dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="div2">
@@ -16,6 +56,7 @@
             <button class="takeOutButton">Set A</button>
             <div class="dropdown-content">
                 <p>Set A-₱ 999</p>
+                <input type="number" id="setAQuantity" placeholder="Quantity" min="0" step="1">
                 <p><strong>3 Choices of meat (300g each)</strong></p>
                 <ul>
                     <li>Beef Belly</li>
@@ -43,7 +84,7 @@
         <div class="dropdown">
             <button class="takeOutButton">Set B</button>
             <div class="dropdown-content">
-                <p>Set B-₱ 1,399</p>
+                <p>Set B-₱ 1399</p>
                 <p><strong>3 Choices of meat (450g each)</strong></p>
                 <ul>
                     <li>Beef Belly</li>
@@ -71,7 +112,7 @@
         <div class="dropdown">
             <button class="takeOutButton">SHABU SHABU</button>
             <div class="dropdown-content">
-                <p>Shabu Shabu Take Out-₱1,099</p>
+                <p>Shabu Shabu Take Out-₱1099</p>
                 <ul>
                     <li>Baguio Pechay</li>
                     <li>6 PCS Balls</li>
@@ -92,6 +133,5 @@
             </div>
         </div>
     </div>
-    
 </body>
 </html>
