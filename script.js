@@ -76,7 +76,57 @@ function addToCart(itemName, quantity, price, imageURL) {
     leftHalfContainer.appendChild(itemDiv);
 }
 
+function updateStock(category, itemName) {
+    let inputElement = document.getElementById(category + itemName);
+    let quantity = parseInt(inputElement.value);
 
+    // Adjust stock based on category and operation
+    if (category === 'food') {
+        // Adjust food stock
+        if (quantity > 0) {
+            // Increase stock
+            // Here you would typically call a function to add stock
+            console.log(`Added ${quantity} ${itemName}`);
+        } else {
+            // Decrease stock
+            // Here you would typically call a function to remove stock
+            console.log(`Removed ${Math.abs(quantity)} ${itemName}`);
+        }
+    } else if (category === 'drink') {
+        // Adjust drink stock
+        if (quantity > 0) {
+            // Increase stock
+            // Here you would typically call a function to add stock
+            console.log(`Added ${quantity} ${itemName}`);
+        } else {
+            // Decrease stock
+            // Here you would typically call a function to remove stock
+            console.log(`Removed ${Math.abs(quantity)} ${itemName}`);
+        }
+    } else if (category === 'sideDish') {
+        // Adjust side dish stock
+        if (quantity > 0) {
+            // Increase stock
+            // Here you would typically call a function to add stock
+            console.log(`Added ${quantity} ${itemName}`);
+        } else {
+            // Decrease stock
+            // Here you would typically call a function to remove stock
+            console.log(`Removed ${Math.abs(quantity)} ${itemName}`);
+        }
+    } else if (category === 'dip') {
+        // Adjust dip stock
+        if (quantity > 0) {
+            // Increase stock
+            // Here you would typically call a function to add stock
+            console.log(`Added ${quantity} ${itemName}`);
+        } else {
+            // Decrease stock
+            // Here you would typically call a function to remove stock
+            console.log(`Removed ${Math.abs(quantity)} ${itemName}`);
+        }
+    }
+}
 
 
 
