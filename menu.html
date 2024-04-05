@@ -13,15 +13,28 @@
     </div>
     <div class="containerMenu">
         <div class="dineIn">
-        <a href="dineIn.html" class="dot" role="button">
-            <img src="images/dineIn.png" alt="Dine In">
-        </a>
+            <a href="#" class="dot" id="dineInButton">
+                <img src="images/dineIn.png" alt="Dine In">
+            </a>
         </div>
         <div class="takeOut">
-        <a href="takeout.html" class="dot" role="button">
-            <img src="images/takeOut.png" alt="Dine In">
-        </a>
+            <a href="takeout.html" class="dot" role="button">
+                <img src="images/takeOut.png" alt="Take Out">
+            </a>
         </div>
     </div>
+
+    <script>
+        document.getElementById('dineInButton').addEventListener('click', function() {
+            var numPeople = prompt("How many people are at the table?");
+            if (numPeople !== null && !isNaN(numPeople) && parseInt(numPeople) > 0) {
+                var totalPrice = parseInt(numPeople) * 545;
+                // what to do here
+                window.location.href = "dineIn.html";
+            } else {
+                alert("Invalid input. Please enter a valid number of people.");
+            }
+        });
+    </script>
 </body>
 </html>
