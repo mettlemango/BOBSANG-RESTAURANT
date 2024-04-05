@@ -479,3 +479,29 @@ a:hover {
     align-items: flex-end; /* Align items to the right side */
     padding-right: 10px; /* Add some padding to the right side */
 }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex-basis: 50%;
+    padding: 0 10px;
+}
+
+.input-wrapper {
+    margin-bottom: 10px;
+}
+
+input[type="number"],
+button {
+    width: calc(100% - 10px); /* Adjust as needed */
+    margin-bottom: 5px;
+}
+
+button {
+    padding: 5px;
+    font-size: 14px;
+}
+
