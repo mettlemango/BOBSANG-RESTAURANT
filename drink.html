@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Drinks</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="div2">
+        <h1 class="headerIntro">Drinks</h1>
+    </div>
     <div class="containerDineIn">
         <div class="drink coke">
             <img src="images/coke.png" alt="coke">
@@ -17,7 +20,7 @@
                     <input type="number" id="cokeQuantity" name="cokeQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('coke')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Coke', document.getElementById('cokeQuantity').value, '₱70.00', 'images/coke.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink pineappleJuice">
@@ -29,31 +32,32 @@
                     <input type="number" id="pineappleJuiceQuantity" name="pineappleJuiceQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('pineappleJuice')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Pineapple Juice', document.getElementById('pineappleJuiceQuantity').value, '₱60.00', 'images/pineappleJuice.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink royal">
             <img src="images/royal.png" alt="royal">
             <div class="tooltip">
-                <p>Price: Price: ₱70.00</p>
+                <p>Price: ₱70.00</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('royal')">-</button>
                     <input type="number" id="royalQuantity" name="royalQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('royal')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Royal', document.getElementById('royalQuantity').value, '₱70.00', 'images/royal.png')">Add to Cart</button>
             </div>
         </div>
+        <!-- Add similar code for other drink items -->
         <div class="drink smb">
             <img src="images/smb.png" alt="smb">
             <div class="tooltip">
-                <p>Price: Price: ₱70.00</p>
+                <p>Price: ₱70.00</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('smb')">-</button>
                     <input type="number" id="smbQuantity" name="smbQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('smb')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('SMB', document.getElementById('smbQuantity').value, '₱70.00', 'images/smb.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink sml">
@@ -65,7 +69,7 @@
                     <input type="number" id="smlQuantity" name="smlQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('sml')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('SML', document.getElementById('smlQuantity').value, '₱70.00', 'images/sml.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink soju">
@@ -77,7 +81,7 @@
                     <input type="number" id="sojuQuantity" name="sojuQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('soju')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Soju', document.getElementById('sojuQuantity').value, '₱75.00', 'images/soju.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink soju1">
@@ -89,7 +93,7 @@
                     <input type="number" id="soju1Quantity" name="soju1Quantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('soju1')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Soju1', document.getElementById('soju1Quantity').value, '₱75.00', 'images/soju1.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink soju2">
@@ -101,7 +105,7 @@
                     <input type="number" id="soju2Quantity" name="soju2Quantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('soju2')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Soju2', document.getElementById('soju2Quantity').value, '₱75.00', 'images/soju2.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink soju4">
@@ -113,35 +117,35 @@
                     <input type="number" id="soju4Quantity" name="soju4Quantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('soju4')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Soju4', document.getElementById('soju4Quantity').value, '₱75.00', 'images/soju4.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink sprite">
             <img src="images/sprite.png" alt="sprite">
             <div class="tooltip">
-                <p>Price: Price: ₱70.00</p>
+                <p>Price: ₱70.00</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('sprite')">-</button>
                     <input type="number" id="spriteQuantity" name="spriteQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('sprite')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Sprite', document.getElementById('spriteQuantity').value, '₱70.00', 'images/sprite.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink water">
             <img src="images/water.png" alt="water">
             <div class="tooltip">
-                <p>Price: Price: ₱30.00</p>
+                <p>Price: ₱30.00</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('water')">-</button>
                     <input type="number" id="waterQuantity" name="waterQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('water')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Water', document.getElementById('waterQuantity').value, '₱30.00', 'images/water.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink nestea">
-            <img src="images/nestea.png" alt="nestea">
+            <img src="images/nestea.jpg" alt="nestea">
             <div class="tooltip">
                 <p>UNLI ICE TEA</p>
                 <div class="quantitySelector">
@@ -149,12 +153,25 @@
                     <input type="number" id="nesteaQuantity" name="nesteaQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('nestea')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Unli Ice Tea', document.getElementById('nesteaQuantity').value, '₱50.00', 'images/nestea.jpg')">Add to Cart</button>
             </div>
         </div>
-       
+        
     </div>
+    <div class="tableNumberContainer" id="tableNumberContainer">
+        <div class="left-half">
+            
+        </div>
+        <div class="right-half">
+            <form id="orderForm">
+                <label for="tableNumber">Table Number:</label>
+                <input type="text" id="tableNumber" name="tableNumber" required>
+                <button class="submitOrderButton" type="submit">Submit Order</button>
+            </form>
+        </div>
+    </div>      
+
+    <div id="cart-items-container"></div>
     <script src="script.js"></script>
 </body>
 </html>
-    
