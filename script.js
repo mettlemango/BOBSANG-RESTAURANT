@@ -45,7 +45,30 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
 });
 
 
-function addToCart(itemName, quantity, price, imageURL) {
+// Object to store drink prices
+var drinkPrices = {
+    "coke": 70.00,
+    "pineappleJuice": 60.00,
+    "royal": 70.00,
+    "smb": 70.00,
+    "sml": 70.00,
+    "soju": 75.00,
+    "soju1": 75.00,
+    "soju2": 75.00,
+    "soju4": 75.00,
+    "sprite": 70.00,
+    "water": 30.00,
+    "nestea": 0.00 // Free
+};
+
+// Function to add item to cart
+function addToCart(itemName, quantity, imageURL) {
+    // Get the price of the item from the drinkPrices object
+    var price = drinkPrices[itemName.toLowerCase()];
+
+    // Calculate the total price based on the quantity
+    var totalPrice = price * quantity;
+
     // Create a new div to represent the added item
     var itemDiv = document.createElement('div');
     itemDiv.classList.add('cart-item');
@@ -63,18 +86,17 @@ function addToCart(itemName, quantity, price, imageURL) {
     itemDiv.appendChild(itemNameQuantity);
 
     // Create a paragraph element for the item price
-    if (price) {
-        var itemPrice = document.createElement('p');
-        itemPrice.textContent = 'Price: ' + price;
-        itemDiv.appendChild(itemPrice);
-    }
+    var itemPrice = document.createElement('p');
+    itemPrice.textContent = 'Total Price: ₱' + totalPrice.toFixed(2); // Format the total price with 2 decimal places
+    itemDiv.appendChild(itemPrice);
 
     // Get the left-half container
-    var leftHalfContainer = document.querySelector('.left-half'); // Selecting the left-half container
+    var leftHalfContainer = document.getElementById('leftCart');
 
     // Append the item div to the left-half container
     leftHalfContainer.appendChild(itemDiv);
 }
+
 
 
 
