@@ -406,3 +406,19 @@ a:hover {
     -webkit-user-select: none;
     touch-action: manipulation;
   }
+  .tableNumberContainer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 100px; /* Adjust the bottom margin as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#orderForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

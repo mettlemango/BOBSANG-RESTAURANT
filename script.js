@@ -30,6 +30,21 @@ function decreaseQuantity(item) {
     }
 }
 
+document.getElementById("orderForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    console.log("Form submitted"); // Check if this message appears in the console
+
+    var tableNumber = document.getElementById("tableNumber").value;
+
+    // Simulate sending the order data to the server (replace this with actual server logic)
+    setTimeout(function() {
+        var messageDiv = document.getElementById("message");
+        messageDiv.textContent = "We have received your order for table " + tableNumber + ". Please wait for a while.";
+    }, 2000); // Simulating a delay of 2 seconds for server response
+});
+
+
 
 
 
