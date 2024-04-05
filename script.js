@@ -45,6 +45,41 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
 });
 
 
+function addToCart(itemName, quantity, price, imageURL) {
+    // Create a new div to represent the added item
+    var itemDiv = document.createElement('div');
+    itemDiv.classList.add('cart-item');
+
+    // Create an image element for the item
+    var itemImage = document.createElement('img');
+    itemImage.src = imageURL;
+    itemDiv.appendChild(itemImage);
+    itemImage.style.width = '50px'; // Adjust the width of the image
+    itemImage.style.height = 'auto'; // Maintain aspect ratio
+
+    // Create a paragraph element for the item name and quantity
+    var itemNameQuantity = document.createElement('p');
+    itemNameQuantity.textContent = itemName + ' (Quantity: ' + quantity + ')';
+    itemDiv.appendChild(itemNameQuantity);
+
+    // Create a paragraph element for the item price
+    if (price) {
+        var itemPrice = document.createElement('p');
+        itemPrice.textContent = 'Price: ' + price;
+        itemDiv.appendChild(itemPrice);
+    }
+
+    // Get the left-half container
+    var leftHalfContainer = document.querySelector('.left-half'); // Selecting the left-half container
+
+    // Append the item div to the left-half container
+    leftHalfContainer.appendChild(itemDiv);
+}
+
+
+
+
+
 
 
 
