@@ -9,6 +9,11 @@
         .foodOption label {
             font-size: 1.7em; /* Adjust font size as needed */
         }
+        .foodOption img {
+            width: 100px; /* Adjust image size as needed */
+            height: 100px;
+            margin-right: 10px; /* Adjust spacing between image and label */
+        }
     </style>
 </head>
 <body>
@@ -19,26 +24,31 @@
     
     <form id="sideDishForm">
         <div class="foodOption">
+            <img src="kimchi.jpg" alt="Kimchi">
             <input type="checkbox" id="kimchi" name="sideDish" value="Kimchi">
             <label for="kimchi">Kimchi</label>
             <input type="number" id="kimchiQuantity" name="kimchiQuantity" min="1" max="10" value="1">
         </div>
         <div class="foodOption">
+            <img src="japchae.jpg" alt="Japchae">
             <input type="checkbox" id="japchae" name="sideDish" value="Japchae">
             <label for="japchae">Japchae</label>
             <input type="number" id="japchaeQuantity" name="japchaeQuantity" min="1" max="10" value="1">
         </div>
         <div class="foodOption">
+            <img src="salad.jpg" alt="Salad">
             <input type="checkbox" id="salad" name="sideDish" value="Salad">
             <label for="salad">Salad</label>
             <input type="number" id="saladQuantity" name="saladQuantity" min="1" max="10" value="1">
         </div>
         <div class="foodOption">
+            <img src="odeng.jpg" alt="Odeng">
             <input type="checkbox" id="odeng" name="sideDish" value="Odeng">
             <label for="odeng">Odeng</label>
             <input type="number" id="odengQuantity" name="odengQuantity" min="1" max="10" value="1">
         </div>
         <div class="foodOption">
+            <img src="sweet_potato.jpg" alt="Sweet Potato">
             <input type="checkbox" id="sweetPotato" name="sideDish" value="Sweet Potato">
             <label for="sweetPotato">Sweet Potato</label>
             <input type="number" id="sweetPotatoQuantity" name="sweetPotatoQuantity" min="1" max="10" value="1">
