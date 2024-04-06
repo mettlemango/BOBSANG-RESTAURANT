@@ -292,8 +292,47 @@ function updateStock(category, itemName) {
     }
 }
 
+    // Function to handle bill out button click
+document.getElementById('billOutButton').addEventListener('click', function() {
+    // Hide drinks selection
+    document.querySelector('.containerDineIn').style.display = 'none';
 
+    // Display receipt section
+    let receiptContainer = document.getElementById('receipt-container');
+    receiptContainer.style.display = 'block';
 
+    // Retrieve items from local storage and display receipt
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalBill = 0;
+    let receiptHTML = '';
+
+    // Fixed expense for dine-in
+    totalBill += 549;
+
+    // Receipt for dine-in
+    receiptHTML += `<div class="receipt-item">
+                        <h3>Dine-In</h3>
+                        <p>Expense: ₱549.00 per head</p>
+                    </div>`;
+
+    // Receipt for additional drinks
+    cart.forEach(item => {
+        receiptHTML += `
+            <div class="receipt-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div>
+                    <h3>${item.name}</h3>
+                    <p>Quantity: ${item.quantity}</p>
+                    <p>Total Price: ₱${item.total}</p>
+                </div>
+            </div>
+        `;
+        totalBill += parseFloat(item.total);
+    });
+
+    receiptHTML += `<div class="total-bill">Total Bill: ₱${totalBill.toFixed(2)}</div>`;
+    receiptContainer.innerHTML = receiptHTML;
+});
 
 
 
