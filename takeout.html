@@ -49,17 +49,29 @@
 
             const meatOptionsSetB = document.querySelectorAll("input[name='meatOptionsSetB']");
             limitCheckboxSelection(meatOptionsSetB, 3);
-            
+
             const meatOptionsSetC = document.querySelectorAll("input[name='meatOptionsSetC']");
             limitCheckboxSelection(meatOptionsSetC, 3);
 
             const orderButtons = document.querySelectorAll(".orderButton");
             orderButtons.forEach(function(button) {
                 button.addEventListener("click", function() {
-                    const quantityInput = this.parentElement.querySelector("input[type='number']");
+                    const dropdownContent = this.parentElement;
+                    const set = dropdownContent.querySelector("p").textContent.trim();
+                    const quantityInput = dropdownContent.querySelector("input[type='number']");
                     const quantity = parseInt(quantityInput.value);
+                    let totalPrice = 0;
+
+                    if (set.includes("Set A")) {
+                        totalPrice = 999 * quantity;
+                    } else if (set.includes("Set B")) {
+                        totalPrice = 1399 * quantity;
+                    } else if (set.includes("Shabu Shabu")) {
+                        totalPrice = 1099 * quantity;
+                    }
+
                     if (quantity > 0) {
-                        alert("Your order has been placed for " + quantity + " of this item.");
+                        alert("Your order has been placed for " + quantity + " of " + set + ". Total price: ₱" + totalPrice);
                         // Here you can add code to process the order
                     } else {
                         alert("Please enter a valid quantity.");
@@ -135,7 +147,7 @@
             <button class="takeOutButton">SHABU SHABU</button>
             <div class="dropdown-content">
                 <p>Shabu Shabu Take Out-₱1099</p>
-                <input type="number" id="setAQuantity" placeholder="Quantity" min="0" step="1">
+                <input type="number" id="shabuQuantity" placeholder="Quantity" min="0" step="1">
                 <ul>
                     <li>Baguio Pechay</li>
                     <li>6 PCS Balls</li>
