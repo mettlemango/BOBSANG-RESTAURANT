@@ -479,3 +479,10 @@ a:hover {
     align-items: flex-end; /* Align items to the right side */
     padding-right: 10px; /* Add some padding to the right side */
 }
+.reduce-button,
+.delete-button {
+    text-align: center;
+    padding: 5px; /* Adjust the padding as needed */
+    width: 20px;
+    margin-left: 5px;
+}

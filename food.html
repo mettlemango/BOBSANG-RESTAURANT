@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
     <div class="div2">
-        <h1 class="headerIntro"> Unlimited Pork/Beef</h1>
+        <h1 class="headerIntro">Unlimited Pork/Beef</h1>
     </div>
 
     <div class="scrollable-container">
@@ -23,7 +22,7 @@
                         <input type="number" id="porkBellyQuantity" name="porkBellyQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('porkBelly')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Pork Belly', document.getElementById('porkBellyQuantity').value, 70.00, 'images/porkbelly.jpg')">Add to Cart</button>
                 </div>
             </div>
             <div class="spicyPorkBelly">
@@ -35,19 +34,19 @@
                         <input type="number" id="spicyPorkBellyQuantity" name="spicyPorkBellyQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('spicyPorkBelly')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Spicy Pork Belly', document.getElementById('spicyPorkBellyQuantity').value, 70.00, 'images/spicyporkbelly.jpg')">Add to Cart</button>
                 </div>
             </div>
             <div class="galbiSauce">
-                <img src="images/galbiSauce.jpg" alt="galbiSauce">
+                <img src="images/galbisauce(Pork).jpg" alt="galbiSauce">
                 <div class="tooltip">
-                    <p>Galbi sauce(pork)</p>
+                    <p>Galbi Sauce (Pork)</p>
                     <div class="quantitySelector">
                         <button class="decrement" onclick="decreaseQuantity('galbiSauce')">-</button>
                         <input type="number" id="galbiSauceQuantity" name="galbiSauceQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('galbiSauce')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Galbi Sauce (Pork)', document.getElementById('galbiSauceQuantity').value, 70.00, 'images/galbiSauce.jpg')">Add to Cart</button>
                 </div>
             </div>
             <div class="beefBelly">
@@ -59,26 +58,24 @@
                         <input type="number" id="beefBellyQuantity" name="beefBellyQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('beefBelly')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Beef Belly', document.getElementById('beefBellyQuantity').value, 70.00, 'images/beefBelly.jpg')">Add to Cart</button>
                 </div>
             </div>
             <div class="laGalbiBeef">
-                <img src="images/lagalbi.jpg" alt="lagalbi">
+                <img src="images/l.a.galbi(Beef).jpg" alt="lagalbi">
                 <div class="tooltip">
-                    <p>L.A Galbi(beef)</p>
+                    <p>L.A. Galbi (Beef)</p>
                     <div class="quantitySelector">
                         <button class="decrement" onclick="decreaseQuantity('laGalbiBeef')">-</button>
                         <input type="number" id="laGalbiBeefQuantity" name="laGalbiBeefQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('laGalbiBeef')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('L.A. Galbi (Beef)', document.getElementById('laGalbiBeefQuantity').value, 70.00, 'images/lagalbi.jpg')">Add to Cart</button>
                 </div>
             </div>  
         </div>
         <div class="tableNumberContainer" id="tableNumberContainer">
-            <div class="left-half">
-                
-            </div>
+            <div class="left-half"></div>
             <div class="right-half">
                 <form id="orderForm">
                     <label for="tableNumber">Table Number:</label>
@@ -87,6 +84,7 @@
                 </form>
             </div>
         </div>        
-<script src="script.js"></script>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
