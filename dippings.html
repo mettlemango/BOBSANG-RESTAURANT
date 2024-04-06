@@ -10,6 +10,12 @@
     <div class="div2">
         <h1 class="headerIntro">Dippings</h1>
     </div>
+    <div class="sidebar" onmouseover="expandSidebar()" onmouseout="collapseSidebar()">
+        <a href="food.html"><button class="button2">Food</button></a>
+        <a href="drink.html"><button class="button2">Drinks</button></a>
+        <a href="dippings.html"><button class="button2">Dippings</button></a>
+        <a href="sidedishes.html"><button class="button2">Side Dishes</button></a>
+    </div>
     <div class="containerDineIn">
         <div class="cheeseDip">
             <img src="images/cheesedip.jpg" alt="Cheese Dip">
@@ -23,6 +29,7 @@
                 <button class="addToCart" onclick="addToCart('Cheese Dip', document.getElementById('cheeseQuantity').value, 20.00, 'images/cheese_dip.jpg')">Add to Cart</button>
             </div>
         </div>
+
         <div class="ssamjang">
             <img src="images/ssamjang.jpg" alt="Ssamjang">
             <div class="tooltip">
@@ -73,3 +80,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+        
