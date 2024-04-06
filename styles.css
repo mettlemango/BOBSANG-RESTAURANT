@@ -324,7 +324,17 @@ button {
     cursor: pointer;
     display: inline-block;
 }
-
+.button2{
+    width: 240px;
+    padding: 10px;
+    background-color: #422800;
+    border: 2px solid #fbeee0;
+    border-radius: 3px;
+    box-shadow: #fbeee0 4px 4px 0 0;
+    cursor: pointer;
+    display: inline-block;
+    color: #fbeee0;
+}
 
 button:hover {
     background-color: #fbeee0;
@@ -470,6 +480,7 @@ a:hover {
 .left-half {
     flex: 1;
     display: flex;
+    padding-left: 60px;;
     flex-direction: column-reverse;
 }
 
@@ -485,4 +496,29 @@ a:hover {
     padding: 5px; /* Adjust the padding as needed */
     width: 20px;
     margin-left: 5px;
+}
+
+.sidebar {
+    width: 50px; /* Initial width */
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0; /* Extend to bottom */
+    background-color: #422800;
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: width 0.5s; /* Smooth transition */
+}
+/* Expand the sidebar on hover */
+.sidebar:hover {
+    width: 250px; /* Expanded width on hover */
+}
+.sidebar button {
+    margin-bottom: 10px;
+    margin-right: 20px;
+    visibility: hidden; /* Hide buttons by default */
+}
+
+.sidebar:hover button {
+    visibility: visible; /* Display buttons when sidebar is hovered */
 }
