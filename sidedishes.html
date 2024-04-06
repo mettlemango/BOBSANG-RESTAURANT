@@ -22,7 +22,7 @@
                         <input type="number" id="kimchiQuantity" name="kimchiQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('kimchi')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Kimchi', document.getElementById('kimchiQuantity').value, 'images/kimchi.jpg')">Add to Cart</button>
                 </div>
             </div>
             <div class="japchae">
@@ -34,7 +34,7 @@
                         <input type="number" id="japchaeQuantity" name="japchaeQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('japchae')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Japchae', document.getElementById('japchaeQuantity').value, 'images/japchae.jpg')">Add to Cart</button>
                 </div>
             </div>
             <div class="salad">
@@ -46,7 +46,7 @@
                         <input type="number" id="saladQuantity" name="saladQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('salad')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Salad', document.getElementById('saladQuantity').value, 'images/salad.jpg')">Add to Cart</button>
                 </div>
             </div>
             <div class="odeng">
@@ -58,11 +58,11 @@
                         <input type="number" id="odengQuantity" name="odengQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('odeng')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Odeng', document.getElementById('odengQuantity').value, 'images/odeng.jpg')">Add to Cart</button>
                 </div>
             </div>
             <div class="sweetPotato">
-                <img src="images/sweet_potato.jpg" alt="Sweet Potato">
+                <img src="images/sweetpotato.jpg" alt="Sweet Potato">
                 <div class="tooltip">
                     <p>Sweet Potato</p>
                     <div class="quantitySelector">
@@ -70,14 +70,12 @@
                         <input type="number" id="sweetPotatoQuantity" name="sweetPotatoQuantity" min="1" max="10" value="1">
                         <button class="increment" onclick="increaseQuantity('sweetPotato')">+</button>
                     </div>
-                    <button class="addToCart">Add to Cart</button>
+                    <button class="addToCart" onclick="addToCart('Sweet Potato', document.getElementById('sweetPotatoQuantity').value, 'images/sweet_potato.jpg')">Add to Cart</button>
                 </div>
             </div>
         </div>
         <div class="tableNumberContainer" id="tableNumberContainer">
-            <div class="left-half">
-
-            </div>
+            <div class="left-half"></div>
             <div class="right-half">
                 <form id="orderForm">
                     <label for="tableNumber">Table Number:</label>
@@ -87,5 +85,6 @@
             </div>
         </div>        
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

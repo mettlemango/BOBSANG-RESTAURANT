@@ -12,15 +12,15 @@
     </div>
     <div class="containerDineIn">
         <div class="cheeseDip">
-            <img src="images/cheese_dip.jpg" alt="Cheese Dip">
+            <img src="images/cheesedip.jpg" alt="Cheese Dip">
             <div class="tooltip">
-                <p>Cheese</p>
+                <p>Cheese Dip</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('cheese')">-</button>
                     <input type="number" id="cheeseQuantity" name="cheeseQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('cheese')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Cheese Dip', document.getElementById('cheeseQuantity').value, 20.00, 'images/cheese_dip.jpg')">Add to Cart</button>
             </div>
         </div>
         <div class="ssamjang">
@@ -32,11 +32,11 @@
                     <input type="number" id="ssamjangQuantity" name="ssamjangQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('ssamjang')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Ssamjang', document.getElementById('ssamjangQuantity').value, 15.00, 'images/ssamjang.jpg')">Add to Cart</button>
             </div>
         </div>
         <div class="sesameOilSalt">
-            <img src="images/sesame_oil_salt.jpg" alt="Sesame Oil/Salt">
+            <img src="images/sesameoilsalt.jpg" alt="Sesame OilSalt">
             <div class="tooltip">
                 <p>Sesame Oil/Salt</p>
                 <div class="quantitySelector">
@@ -44,32 +44,31 @@
                     <input type="number" id="sesameOilSaltQuantity" name="sesameOilSaltQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('sesameOilSalt')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Sesame OilSalt', document.getElementById('sesameOilSaltQuantity').value, 10.00, 'images/sesame_oil_salt.jpg')">Add to Cart</button>
             </div>
         </div>
         <div class="lettuceWrap">
-            <img src="images/lettuce_wrap.jpg" alt="Lettuce Wrap">
+            <img src="images/lettucewrap.jpg" alt="Lettuce Wrap">
             <div class="tooltip">
-                <p>Lettuce</p>
+                <p>Lettuce Wrap</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('lettuceWrap')">-</button>
                     <input type="number" id="lettuceWrapQuantity" name="lettuceWrapQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('lettuceWrap')">+</button>
                 </div>
-                <button class="addToCart">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Lettuce Wrap', document.getElementById('lettuceWrapQuantity').value, 25.00, 'images/lettuce_wrap.jpg')">Add to Cart</button>
             </div>
         </div>
+    </div>
     <div class="tableNumberContainer" id="tableNumberContainer">
-        <div class="left-half">
-            
-        </div>
+        <div class="left-half"></div>
         <div class="right-half">
             <form id="orderForm">
                 <label for="tableNumber">Table Number:</label>
                 <input type="text" id="tableNumber" name="tableNumber" required>
                 <button class="submitOrderButton" type="submit">Submit Order</button>
             </form>
-        </div>   
+        </div>
     </div>     
     <script src="script.js"></script>
 </body>
