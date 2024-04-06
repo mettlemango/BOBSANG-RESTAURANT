@@ -9,29 +9,15 @@
         .dropdown-content {
             display: none;
         }
+
+        /* Change the color of checkbox label text */
+        .dropdown-content label {
+            color: #D6CEBA; /* Change this to the desired text color */
+            font-weight: normal; /* Set font weight to normal */
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const setAQuantityInput = document.getElementById("setAQuantity");
-            const setBQuantityInput = document.getElementById("setBQuantity");
-            const shabuShabuQuantityInput = document.getElementById("shabuShabuQuantity");
-
-            const setAButton = document.querySelector(".dropdown:nth-child(1) .takeOutButton");
-            const setBButton = document.querySelector(".dropdown:nth-child(2) .takeOutButton");
-            const shabuShabuButton = document.querySelector(".dropdown:nth-child(3) .takeOutButton");
-
-            setAQuantityInput.addEventListener("input", function() {
-                setAButton.disabled = !(parseInt(setAQuantityInput.value) > 0);
-            });
-
-            setBQuantityInput.addEventListener("input", function() {
-                setBButton.disabled = !(parseInt(setBQuantityInput.value) > 0);
-            });
-
-            shabuShabuQuantityInput.addEventListener("input", function() {
-                shabuShabuButton.disabled = !(parseInt(shabuShabuQuantityInput.value) > 0);
-            });
-
             const dropdownButtons = document.querySelectorAll(".takeOutButton");
             dropdownButtons.forEach(function(button) {
                 button.addEventListener("click", function() {
@@ -40,6 +26,43 @@
                         dropdownContent.style.display = "none";
                     } else {
                         dropdownContent.style.display = "block";
+                    }
+                });
+            });
+
+            // Function to limit the number of checkboxes that can be selected
+            function limitCheckboxSelection(checkboxes, maxAllowed) {
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.addEventListener("change", function() {
+                        const checkedCheckboxes = Array.from(checkboxes).filter(function(checkbox) {
+                            return checkbox.checked;
+                        });
+                        if (checkedCheckboxes.length > maxAllowed) {
+                            this.checked = false;
+                        }
+                    });
+                });
+            }
+
+            const meatOptionsSetA = document.querySelectorAll("input[name='meatOptionsSetA']");
+            limitCheckboxSelection(meatOptionsSetA, 3);
+
+            const meatOptionsSetB = document.querySelectorAll("input[name='meatOptionsSetB']");
+            limitCheckboxSelection(meatOptionsSetB, 3);
+            
+            const meatOptionsSetC = document.querySelectorAll("input[name='meatOptionsSetC']");
+            limitCheckboxSelection(meatOptionsSetC, 3);
+
+            const orderButtons = document.querySelectorAll(".orderButton");
+            orderButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    const quantityInput = this.parentElement.querySelector("input[type='number']");
+                    const quantity = parseInt(quantityInput.value);
+                    if (quantity > 0) {
+                        alert("Your order has been placed for " + quantity + " of this item.");
+                        // Here you can add code to process the order
+                    } else {
+                        alert("Please enter a valid quantity.");
                     }
                 });
             });
@@ -58,13 +81,11 @@
                 <p>Set A-₱ 999</p>
                 <input type="number" id="setAQuantity" placeholder="Quantity" min="0" step="1">
                 <p><strong>3 Choices of meat (300g each)</strong></p>
-                <ul>
-                    <li>Beef Belly</li>
-                    <li>Pork Belly</li>
-                    <li>Spicy Pork</li>
-                    <li>Galbi Sauce (Pork)</li>
-                    <li>L.A Galbi (Beef)</li>
-                </ul>
+                <label><input type="checkbox" name="meatOptionsSetA" value="beefBelly"> Beef Belly</label>
+                <label><input type="checkbox" name="meatOptionsSetA" value="porkBelly"> Pork Belly</label>
+                <label><input type="checkbox" name="meatOptionsSetA" value="spicyPork"> Spicy Pork</label>
+                <label><input type="checkbox" name="meatOptionsSetA" value="galbiSauce"> Galbi Sauce (Pork)</label>
+                <label><input type="checkbox" name="meatOptionsSetA" value="laGalbi"> L.A Galbi (Beef)</label>
                 <p><strong>5 Kinds of Side dishes</strong></p>
                 <ul>
                     <li>Kimchi</li>
@@ -79,21 +100,20 @@
                     <li>Ssamjang</li>
                     <li>Sesame Oil W/ Salt</li>
                 </ul>
+                <button class="orderButton">Order</button>
             </div>
         </div>
         <div class="dropdown">
             <button class="takeOutButton">Set B</button>
             <div class="dropdown-content">
                 <p>Set B-₱ 1399</p>
-                <input type="number" id="setAQuantity" placeholder="Quantity" min="0" step="1">
+                <input type="number" id="setBQuantity" placeholder="Quantity" min="0" step="1">
                 <p><strong>3 Choices of meat (450g each)</strong></p>
-                <ul>
-                    <li>Beef Belly</li>
-                    <li>Pork Belly</li>
-                    <li>Spicy Pork</li>
-                    <li>Galbi Sauce (Pork)</li>
-                    <li>L.A Galbi (Beef)</li>
-                </ul>
+                <label><input type="checkbox" name="meatOptionsSetB" value="beefBelly"> Beef Belly</label>
+                <label><input type="checkbox" name="meatOptionsSetB" value="porkBelly"> Pork Belly</label>
+                <label><input type="checkbox" name="meatOptionsSetB" value="spicyPork"> Spicy Pork</label>
+                <label><input type="checkbox" name="meatOptionsSetB" value="galbiSauce"> Galbi Sauce (Pork)</label>
+                <label><input type="checkbox" name="meatOptionsSetB" value="laGalbi"> L.A Galbi (Beef)</label>
                 <p><strong>5 Kinds of Side dishes</strong></p>
                 <ul>
                     <li>Kimchi</li>
@@ -108,6 +128,7 @@
                     <li>Ssamjang</li>
                     <li>Sesame Oil W/ Salt</li>
                 </ul>
+                <button class="orderButton">Order</button>
             </div>
         </div>
         <div class="dropdown">
@@ -132,6 +153,7 @@
                     <li>1,500 mL Soup</li>
                     <li>Sea Weeds</li>
                 </ul>
+                <button class="orderButton">Order</button>
             </div>
         </div>
     </div>

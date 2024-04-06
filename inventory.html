@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .inventory-container {
+            background-color: #fbeee0; /* Background color */
+            border: 1px solid #ccc; /* Border */
+            border-radius: 10px; /* Border radius */
+            padding: 20px; /* Padding */
+            max-width: 800px; /* Max width */
+            margin: 0 auto; /* Center horizontally */
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .column {
+            width: 48%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .column h2 {
+            margin-top: 0;
+        }
+
+        .stock-quantity {
+            font-size: 14px;
+            color: #39241B;
+        }
+    </style>
+</head>
+<body>
+    <div class="inventory-container">
+        <h1>Inventory Management</h1>
+        
+        <div class="container">
+            <div class="column">
+                <h2>Meat Inventory</h2>
+                <strong>Pork Belly</strong>
+                <input type="number" id="PorkBelly" placeholder="Enter quantity">
+                <button onclick="updateStock('meat', 'PorkBelly')">Add Pork Belly</button>
+                <p class="stock-quantity" id="currentPorkBelly">Current stock: <span>0</span></p>
+
+                <strong>Spicy Pork Belly</strong>
+                <input type="number" id="SpicyPork" placeholder="Enter quantity">
+                <button onclick="updateStock('meat', 'SpicyPork')">Add Spicy Pork Belly</button>
+                <p class="stock-quantity" id="currentSpicyPork">Current stock: <span>0</span></p>
+
+                <strong>Beef Belly</strong>
+                <input type="number" id="BeefBelly" placeholder="Enter quantity">
+                <button onclick="updateStock('meat', 'BeefBelly')">Add Beef Belly</button>
+                <p class="stock-quantity" id="currentBeefBelly">Current stock: <span>0</span></p>
+
+                <strong>Galbi Sauce</strong>
+                <input type="number" id="GalbiSauce" placeholder="Enter quantity">
+                <button onclick="updateStock('meat', 'GalbiSauce')">Add Galbi Sauce</button>
+                <p class="stock-quantity" id="currentGalbiSauce">Current stock: <span>0</span></p>
+
+                <strong>L.A. Galbi</strong>
+                <input type="number" id="LaGalbi" placeholder="Enter quantity">
+                <button onclick="updateStock('meat', 'LaGalbi')">Add L.A. Galbi</button>
+                <p class="stock-quantity" id="currentLaGalbi">Current stock: <span>0</span></p>
+            </div>
+            
+            <div class="column">
+                <h2>Drink Inventory</h2>
+                <strong>Coke</strong>
+                <input type="number" id="Coke" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Coke')">Add Coke</button>
+                <p class="stock-quantity" id="currentCoke">Current stock: <span>0</span></p>
+
+                <!-- Complete list of drink items -->
+                <strong>Sprite</strong>
+                <input type="number" id="Sprite" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Sprite')">Add Sprite</button>
+                <p class="stock-quantity" id="currentSprite">Current stock: <span>0</span></p>
+
+                <strong>Royal</strong>
+                <input type="number" id="Royal" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Royal')">Add Royal</button>
+                <p class="stock-quantity" id="currentRoyal">Current stock: <span>0</span></p>
+
+                <!-- Add other drink items here -->
+                <strong>Pineapple Juice</strong>
+                <input type="number" id="PineappleJuice" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'PineappleJuice')">Add Pineapple Juice</button>
+                <p class="stock-quantity" id="currentPineappleJuice">Current stock: <span>0</span></p>
+
+                <strong>SMB</strong>
+                <input type="number" id="Smb" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Smb')">Add SMB</button>
+                <p class="stock-quantity" id="currentSmb">Current stock: <span>0</span></p>
+
+                <strong>SML</strong>
+                <input type="number" id="Sml" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Sml')">Add SML</button>
+                <p class="stock-quantity" id="currentSml">Current stock: <span>0</span></p>
+
+                <strong>Soju Green Grape</strong>
+                <input type="number" id="Soju" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Soju')">Add Soju Green Grape</button>
+                <p class="stock-quantity" id="currentSoju">Current stock: <span>0</span></p>
+
+                <strong>Soju Peach</strong>
+                <input type="number" id="Soju1" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Soju1')">Add Soju Peach</button>
+                <p class="stock-quantity" id="currentSoju1">Current stock: <span>0</span></p>
+
+                <strong>Soju Strawberry</strong>
+                <input type="number" id="Soju2" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Soju2')">Add Soju Strawberry</button>
+                <p class="stock-quantity" id="currentSoju2">Current stock: <span>0</span></p>
+
+                <strong>Water</strong>
+                <input type="number" id="Water" placeholder="Enter quantity">
+                <button onclick="updateStock('drink', 'Water')">Add Water</button>
+                <p class="stock-quantity" id="currentWater">Current stock: <span>0</span></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="column">
+                <h2>Side Dish Inventory</h2>
+                <strong>Kimchi</strong>
+                <input type="number" id="Kimchi" placeholder="Enter quantity">
+                <button onclick="updateStock('sideDish', 'Kimchi')">Add Kimchi</button>
+                <p class="stock-quantity" id="currentKimchi">Current stock: <span>0</span></p>
+
+                <input type="number" id="Salad" placeholder="Enter quantity">
+                <button onclick="updateStock('sideDish', 'Salad')">Add Salad</button>
+                <p class="stock-quantity" id="currentSalad">Current stock: <span>0</span></p>
+
+                <strong>Odeng</strong>
+                <input type="number" id="Odeng" placeholder="Enter quantity">
+                <button onclick="updateStock('sideDish', 'Odeng')">Add Odeng</button>
+                <p class="stock-quantity" id="currentOdeng">Current stock: <span>0</span></p>
+
+                <strong>Japchae</strong>
+                <input type="number" id="Japchae" placeholder="Enter quantity">
+                <button onclick="updateStock('sideDish', 'Japchae')">Add Japchae</button>
+                <p class="stock-quantity" id="currentJapchae">Current stock: <span>0</span></p>
+
+                <strong>Sweet Potatoes</strong>
+                <input type="number" id="SweetPotatoes" placeholder="Enter quantity">
+                <button onclick="updateStock('sideDish', 'SweetPotatoes')">Add Sweet Potatoes</button>
+                <p class="stock-quantity" id="currentSweetPotatoes">Current stock: <span>0</span></p>
+            </div>
+            
+            <div class="column">
+                <h2>Dip Inventory</h2>
+                <strong>Cheese</strong>
+                <input type="number" id="Cheese" placeholder="Enter quantity">
+                <button onclick="updateStock('dip', 'Cheese')">Add Cheese</button>
+                <p class="stock-quantity" id="currentCheese">Current stock: <span>0</span></p>
+
+                <strong>Ssamjang</strong>
+                <input type="number" id="Ssamjang" placeholder="Enter quantity">
+                <button onclick="updateStock('dip', 'Ssamjang')">Add Ssamjang</button>
+                <p class="stock-quantity" id="currentSsamjang">Current stock: <span>0</span></p>
+
+                <strong>Sesame Oil / Salt</strong>
+                <input type="number" id="SesameOilSalt" placeholder="Enter quantity">
+                <button onclick="updateStock('dip', 'SesameOilSalt')">Add Sesame Oil / Salt</button>
+                <p class="stock-quantity" id="currentSesameOilSalt">Current stock: <span>0</span></p>
+
+                <strong>Lettuce</strong>
+                <input type="number" id="Lettuce" placeholder="Enter quantity">
+                <button onclick="updateStock('dip', 'Lettuce')">Add Lettuce</button>
+                <p class="stock-quantity" id="currentLettuce">Current stock: <span>0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateStock(category, item) {
+            const quantityInput = document.getElementById(item);
+            const currentStock = document.getElementById('current' + item).querySelector('span');
+            const quantity = parseInt(quantityInput.value);
+            const currentQuantity = parseInt(currentStock.textContent);
+            const newQuantity = currentQuantity + quantity;
+            currentStock.textContent = newQuantity;
+            quantityInput.value = ''; // Clear input field after updating stock
+        }
+    </script>
+</body>
+</html>
