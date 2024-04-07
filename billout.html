@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Out</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="food.html"><button class="button2">Food</button></a>
+        <a href="drink.html"><button class="button2">Drinks</button></a>
+        <a href="dippings.html"><button class="button2">Dippings</button></a>
+        <a href="sidedishes.html"><button class="button2">Side Dishes</button></a>
+        <a href="billout.html"><button class="button2">Bill out</button></a>
+    </div>
+    <div class="div2">
+        <h1 class="headerIntro">Bill Out</h1>
+    </div>
+
+    <div class="tableNumberContainer">
+        <form id="tableNumberForm">
+            <label for="tableNumber">Enter Table Number:</label>
+            <input type="text" id="tableNumber" name="tableNumber" required>
+            <button type="button" onclick="generateReceipt()">Generate Receipt</button>
+        </form>
+    </div>
+
+    <div id="receipt-container" style="display: none;">
+        <!-- Receipt content will be dynamically generated here -->
+    </div>
+
+    <div id="cart-items-container"></div>
+    <button id="billOutButton" style="display: none;">Bill Out</button>
+
+    <script src="script.js"></script>
+    <script>
+        function calculateTotalBill() {
+            // Your existing code for calculating the total bill
+            // This remains unchanged
+        }
+
+        function generateReceipt() {
+            var receiptContainer = document.getElementById('receipt-container');
+            var totalBill = calculateTotalBill();
+            var tableNumber = document.getElementById('tableNumber').value; // Retrieve the table number inputted by the customer
+
+            var receiptContent = "<h2>Receipt</h2>";
+            receiptContent += "<p>Table Number: " + tableNumber + "</p>"; // Include the table number in the receipt
+            receiptContent += "<p>Total Bill: PHP " + totalBill.toFixed(2) + "</p>";
+            receiptContent += "<p>Thank you for dining with us!</p>";
+
+            receiptContainer.innerHTML = receiptContent;
+            receiptContainer.style.display = "block";
+            document.getElementById('billOutButton').style.display = "block"; // Show the "Bill Out" button
+        }
+
+        // Your existing code for handling other functionalities like adding items to the cart, etc.
+        // This remains unchanged
+    </script>
+</body>
+</html>
