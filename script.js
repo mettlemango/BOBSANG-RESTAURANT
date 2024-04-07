@@ -320,3 +320,4 @@ window.onload = function() {
     var orders = JSON.parse(localStorage.getItem('orders')) || [];
     displayOrders(orders);
 };
+

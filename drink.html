@@ -165,23 +165,18 @@
         
     </div>
     <div class="tableNumberContainer" id="tableNumberContainer">
-        <div class="left-half" id="drinksOrders">
-            
-        </div>
+        <div class="left-half" id="drinksOrders"></div>
         <div class="right-half">
             <form id="orderForm">
                 <label for="tableNumber">Table Number:</label>
                 <input type="text" id="tableNumber" name="tableNumber" required>
                 <button class="submitOrderButton" type="submit">Submit Order</button>
+                <button class="submitOrderButton" id="billOutButton">Bill Out</button>
             </form>
         </div>
     </div>      
 
-    <div id="cart-items-container"></div>
-    <button id="billOutButton">Bill Out</button>
-
-    <div id="receipt-container" style="display: none;"></div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>

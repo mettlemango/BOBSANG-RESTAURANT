@@ -266,12 +266,16 @@ body{
 }
 
 .login-container {
+    
     width: 300px;
-    margin: 100px auto;
+    margin: 100px;
+    margin-right: 500px auto;
     padding: 20px;
     background-color: #fbeee0;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    float:right;
+    
 }
 
 .hIntro{
