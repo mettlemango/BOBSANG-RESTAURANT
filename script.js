@@ -68,10 +68,10 @@ function addToCart(itemName, quantity) {
         case 'sprite':
             price = 70.00;
             break;
-        case 'soju':
-        case 'soju1':
-        case 'soju2':
-        case 'soju4':
+        case 'soju green grape':
+        case 'soju peach':
+        case 'soju chamisul fresh':
+        case 'soju strawberry':
             price = 75.00;
             break;
         case 'water':
@@ -321,3 +321,17 @@ window.onload = function() {
     displayOrders(orders);
 };
 
+function generateReceipt() {
+    var receiptContainer = document.getElementById('receipt-container');
+    var totalBill = calculateTotalBill();
+    var tableNumber = document.getElementById('tableNumber').value; // Retrieve the table number inputted by the customer
+
+    var receiptContent = "<h2>Receipt</h2>";
+    receiptContent += "<p>Table Number: " + tableNumber + "</p>"; // Include the table number in the receipt
+    receiptContent += "<p>Total Bill: PHP " + totalBill.toFixed(2) + "</p>";
+    receiptContent += "<p>Thank you for dining with us!</p>";
+
+    receiptContainer.innerHTML = receiptContent;
+    receiptContainer.style.display = "block";
+    document.getElementById('billOutButton').style.display = "block"; // Show the "Bill Out" button
+}

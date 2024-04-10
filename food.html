@@ -15,7 +15,6 @@
         <a href="drink.html"><button class="button2">Drinks</button></a>
         <a href="dippings.html"><button class="button2">Dippings</button></a>
         <a href="sidedishes.html"><button class="button2">Side Dishes</button></a>
-        <a href="billout.html"><button class="button2">Bill out</button></a>
     </div>
     <div class="containerDineIn">
         <div class="porkBelly">
@@ -80,13 +79,14 @@
         </div>  
     </div>
     <div class="tableNumberContainer" id="tableNumberContainer">
-        <div class="left-half" id="foodOrders"></div>
+        <div class="left-half" id="drinksOrders"></div>
         <div class="right-half">
             <form id="orderForm">
-                <label for="tableNumber">Table Number:</label>
+                <label for="tableNumber" style="margin-right: 40px;">Table Number:</label>
                 <input type="text" id="tableNumber" name="tableNumber" required>
-                <button class="submitOrderButton" type="submit">Submit Order</button>
             </form>
+        <button class="submitOrderButton" type="submit">Submit Order</button><br>
+        <a href="billout.html" ><button class="submitOrderButton">Bill out</button></a>
         </div>
     </div>        
     <script src="script.js"></script>

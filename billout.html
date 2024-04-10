@@ -34,29 +34,5 @@
     <button id="billOutButton" style="display: none;">Bill Out</button>
 
     <script src="script.js"></script>
-    <script>
-        function calculateTotalBill() {
-            // Your existing code for calculating the total bill
-            // This remains unchanged
-        }
-
-        function generateReceipt() {
-            var receiptContainer = document.getElementById('receipt-container');
-            var totalBill = calculateTotalBill();
-            var tableNumber = document.getElementById('tableNumber').value; // Retrieve the table number inputted by the customer
-
-            var receiptContent = "<h2>Receipt</h2>";
-            receiptContent += "<p>Table Number: " + tableNumber + "</p>"; // Include the table number in the receipt
-            receiptContent += "<p>Total Bill: PHP " + totalBill.toFixed(2) + "</p>";
-            receiptContent += "<p>Thank you for dining with us!</p>";
-
-            receiptContainer.innerHTML = receiptContent;
-            receiptContainer.style.display = "block";
-            document.getElementById('billOutButton').style.display = "block"; // Show the "Bill Out" button
-        }
-
-        // Your existing code for handling other functionalities like adding items to the cart, etc.
-        // This remains unchanged
-    </script>
 </body>
 </html>
