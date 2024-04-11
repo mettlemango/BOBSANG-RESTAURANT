@@ -51,6 +51,7 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
     }); // Simulate 2-second delay for server response
 });
 
+
 // Function to add an item to the cart
 function addToCart(itemName, quantity) {
     // Define price based on item name
@@ -132,16 +133,7 @@ function addToCart(itemName, quantity) {
     // Update the cart UI
     updateCartUI();
 
-    // AJAX request to insert order into database
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "insert_order.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log(xhr.responseText); // Log the response from the server
-        }
-    };
-    xhr.send("itemName=" + itemName + "&quantity=" + quantity + "&price=" + price);
+    
 }
 
 
@@ -283,18 +275,18 @@ function deleteFromCart(itemName) {
 function submitOrder() {
     var tableNumber = document.getElementById("tableNumber").value;
 
-    // AJAX request to submit order to the server
+    // AJAX request to insert order into database
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "submit_order.php", true);
+    xhr.open("POST", "insert_order.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             console.log(xhr.responseText); // Log the response from the server
-            // Clear the cart and display a message
-            clearCartAndDisplayMessage();
         }
     };
-    xhr.send("tableNumber=" + tableNumber);
+    xhr.send("itemName=" + itemName + "&quantity=" + quantity + "&price=" + totalPrice + "tableNumber=" + tableNumber);
+
+    clearCartAndDisplayMessage();
 }
 
 // Function to clear the cart and display a message
@@ -302,7 +294,7 @@ function clearCartAndDisplayMessage() {
     // Clear the items presented on the left half
     var leftHalfContainer = document.querySelector('.left-half');
     leftHalfContainer.innerHTML = '';
-
+    localStorage.removeItem('cartItems');
     // Display a message indicating that the restaurant has received the orders
     var messageDiv = document.getElementById("message");
     messageDiv.textContent = "Your order has been received. Thank you for dining with us!";
