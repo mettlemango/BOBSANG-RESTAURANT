@@ -1,9 +1,9 @@
 <?php
 // PHP code to fetch current stock information from the database and return it as JSON
 $servername = "localhost";
-$username = "Kyle";
-$password = "test1234";
-$database = "inventory";
+$username = "root";
+$password = "";
+$database = "bobsangrestaurant";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
