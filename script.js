@@ -131,7 +131,19 @@ function addToCart(itemName, quantity) {
 
     // Update the cart UI
     updateCartUI();
+
+    // AJAX request to insert order into database
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "insert_order.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log(xhr.responseText); // Log the response from the server
+        }
+    };
+    xhr.send("itemName=" + itemName + "&quantity=" + quantity + "&price=" + price);
 }
+
 
 // Function to update the cart UI based on stored cart items
 function updateCartUI() {
@@ -267,22 +279,36 @@ function deleteFromCart(itemName) {
     updateCartUI();
 }
 
-document.getElementById("orderForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    console.log("Form submitted"); // Check if this message appears in the console
-
+// Function to submit order
+function submitOrder() {
     var tableNumber = document.getElementById("tableNumber").value;
 
-    // Simulate sending the order data to the server (replace this with actual server logic)
-    setTimeout(function() {
-        var messageDiv = document.getElementById("message");
-        messageDiv.textContent = "We have received your order for table " + tableNumber + ". Please wait for a while.";
-    }, 2000); // Simulating a delay of 2 seconds for server response
+    // AJAX request to submit order to the server
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "submit_order.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log(xhr.responseText); // Log the response from the server
+            // Clear the cart and display a message
+            clearCartAndDisplayMessage();
+        }
+    };
+    xhr.send("tableNumber=" + tableNumber);
+}
 
-    // Save the order to local storage
-    saveOrderToLocalStorage(tableNumber);
-});
+// Function to clear the cart and display a message
+function clearCartAndDisplayMessage() {
+    // Clear the items presented on the left half
+    var leftHalfContainer = document.querySelector('.left-half');
+    leftHalfContainer.innerHTML = '';
+
+    // Display a message indicating that the restaurant has received the orders
+    var messageDiv = document.getElementById("message");
+    messageDiv.textContent = "Your order has been received. Thank you for dining with us!";
+}
+
+
 
 // Function to save the order to local storage
 function saveOrderToLocalStorage(tableNumber) {
