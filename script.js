@@ -52,6 +52,7 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
 });
 
 
+
 // Function to add an item to the cart
 function addToCart(itemName, quantity) {
     // Define price based on item name
