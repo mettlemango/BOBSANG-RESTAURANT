@@ -273,21 +273,33 @@ function deleteFromCart(itemName) {
 
 // Function to submit order
 function submitOrder() {
+    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     var tableNumber = document.getElementById("tableNumber").value;
 
-    // AJAX request to insert order into database
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "insert_order.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log(xhr.responseText); // Log the response from the server
-        }
-    };
-    xhr.send("itemName=" + itemName + "&quantity=" + quantity + "&price=" + totalPrice + "tableNumber=" + tableNumber);
+    // Iterate through cart items and submit each item
+    cartItems.forEach(function(item) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "submit_order.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText); // Log the response from the server
+            }
+        };
 
+        // Send AJAX request with item information
+        xhr.send(
+            "itemName=" + item.itemName +
+            "&quantity=" + item.quantity +
+            "&price=" + item.price +
+            "&tableNumber=" + tableNumber
+        );
+    });
+
+    // Clear the cart and display a message after submission
     clearCartAndDisplayMessage();
 }
+
 
 // Function to clear the cart and display a message
 function clearCartAndDisplayMessage() {
