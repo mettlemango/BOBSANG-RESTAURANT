@@ -178,7 +178,6 @@
                 <input type="text" id="tableNumber" name="tableNumber" required>
                 <button type="button" class="submitOrderButton" onclick="submitOrder()">Submit Order</button>
             </form>
-
         <a href="billout.html" ><button class="submitOrderButton">Bill out</button>
         </div>
     </div>      

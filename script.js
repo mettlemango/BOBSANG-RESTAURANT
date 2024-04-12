@@ -1,3 +1,6 @@
+let orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+
 // Event listener for the login form submission
 document.getElementById("login-form").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent form submission
