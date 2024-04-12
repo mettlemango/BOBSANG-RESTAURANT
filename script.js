@@ -246,50 +246,45 @@ function submitOrder() {
     var tableNumber = document.getElementById("tableNumber").value;
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    // Iterate through each cart item
     cartItems.forEach(function(item) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "update_stock.php", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-
-        // Create the request data as a JSON object
+        // Prepare data to send to the server
         var requestData = {
             itemName: item.itemName,
-            quantity: item.quantity
+            quantity: item.quantity,
+            price: item.price,
+            tableNumber: tableNumber
         };
 
-        // Send the AJAX request
-        xhr.send(JSON.stringify(requestData));
+        // Create a new XMLHttpRequest to send data to insert_order.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "insert_order.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
 
-        // Handle the response using the xhr.onload function
+        // Handle server response
         xhr.onload = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    try {
-                        // Attempt to parse JSON response
-                        var responseData = JSON.parse(xhr.responseText);
-                        
-                        // Check if the response contains a success property
-                        if (responseData.success) {
-                            console.log(`Stock updated for ${item.itemName}: ${responseData.message}`);
-                        } else {
-                            console.error(`Failed to update stock for ${item.itemName}: ${responseData.message}`);
-                        }
-                    } catch (error) {
-                        console.error(`Error parsing JSON response:`, error);
-                        console.error(`Response: ${xhr.responseText}`);
+                    // Parse JSON response from server
+                    var responseData = JSON.parse(xhr.responseText);
+                    if (responseData.success) {
+                        console.log(`Order for ${item.itemName} submitted successfully.`);
+                    } else {
+                        console.error(`Failed to submit order for ${item.itemName}: ${responseData.message}`);
                     }
                 } else {
-                    console.error(`Failed to update stock for ${item.itemName}: ${xhr.statusText}`);
+                    console.error(`Failed to submit order for ${item.itemName}: ${xhr.statusText}`);
                 }
             }
         };
-        
+
+        // Send the request with the JSON data
+        xhr.send(JSON.stringify(requestData));
     });
 
     // Clear the cart and display a confirmation message
     clearCartAndDisplayMessage();
 }
+
 
 // Function to clear the cart and display a message
 function clearCartAndDisplayMessage() {
@@ -478,3 +473,4 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error fetching stock data:", error);
         });
 });
+
