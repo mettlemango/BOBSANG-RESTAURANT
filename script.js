@@ -51,39 +51,8 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
     }); // Simulate 2-second delay for server response
 });
 
-
-
 // Function to add an item to the cart
-function addToCart(itemName, quantity) {
-    // Define price based on item name
-    var price;
-    switch (itemName.toLowerCase()) {
-        case 'coke':
-            price = 70.00;
-            break;
-        case 'pineapple juice':
-            price = 60.00;
-            break;
-        case 'royal':
-        case 'smb':
-        case 'sml':
-        case 'sprite':
-            price = 70.00;
-            break;
-        case 'soju green grape':
-        case 'soju peach':
-        case 'soju chamisul fresh':
-        case 'soju strawberry':
-            price = 75.00;
-            break;
-        case 'water':
-            price = 30.00;
-            break;
-        default:
-            price = 0.00; // Default price if not found
-            break;
-    }
-
+function addToCart(itemName, quantity, price) {
     // Calculate total price
     var totalPrice = price * parseInt(quantity);
 
@@ -275,16 +244,23 @@ function deleteFromCart(itemName) {
 // Function to submit order
 function submitOrder() {
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    console.log("Submitting order");
+    // Get the cart items from local storage
+    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     var tableNumber = document.getElementById("tableNumber").value;
+    console.log(`Cart items:`, cartItems);
 
-    // Iterate through cart items and submit each item
+    // Iterate through each cart item
     cartItems.forEach(function(item) {
+        console.log(`Submitting order for item: ${item.itemName}, quantity: ${item.quantity}`);
+        
+        // Submit the order for each item (existing functionality)
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "submit_order.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                console.log(xhr.responseText); // Log the response from the server
+                console.log(`Order submitted for ${item.itemName}: ${xhr.responseText}`);
             }
         };
 
@@ -295,9 +271,14 @@ function submitOrder() {
             "&price=" + item.price +
             "&tableNumber=" + tableNumber
         );
+
+        // Update the stock for each item in the order
+        console.log(`Updating stock for item: ${item.itemName}`);
+        updateStock(item.itemName, item.quantity);
+        
     });
 
-    // Clear the cart and display a message after submission
+    console.log("Clearing cart and displaying message");
     clearCartAndDisplayMessage();
 }
 
@@ -312,7 +293,6 @@ function clearCartAndDisplayMessage() {
     var messageDiv = document.getElementById("message");
     messageDiv.textContent = "Your order has been received. Thank you for dining with us!";
 }
-
 
 
 // Function to save the order to local storage
@@ -335,7 +315,7 @@ function saveOrderToLocalStorage(tableNumber) {
 
 // Function to display orders on the page
 function displayOrders(orders) {
-    var ordersContainer = document.getElementById("drinksOrders");
+    var ordersContainer = document.getElementById("Orders");
     ordersContainer.innerHTML = ""; // Clear previous orders
 
     // Loop through the orders array and create HTML elements to display each order
@@ -365,4 +345,14 @@ function generateReceipt() {
     receiptContainer.innerHTML = receiptContent;
     receiptContainer.style.display = "block";
     document.getElementById('billOutButton').style.display = "block"; // Show the "Bill Out" button
+}
+
+function updateStock(category, item) {
+    const quantityInput = document.getElementById(item);
+    const currentStock = document.getElementById('current' + item).querySelector('span');
+    const quantity = parseInt(quantityInput.value);
+    const currentQuantity = parseInt(currentStock.textContent);
+    const newQuantity = currentQuantity + quantity;
+    currentStock.textContent = newQuantity;
+    quantityInput.value = ''; // Clear input field after updating stock
 }

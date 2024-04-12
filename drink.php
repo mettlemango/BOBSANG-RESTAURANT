@@ -8,10 +8,10 @@
 </head>
 <body>
     <div class="sidebar" onmouseover="expandSidebar()" onmouseout="collapseSidebar()">
-        <a href="food.html"><button class="button2">Food</button></a>
-        <a href="drink.html"><button class="button2">Drinks</button></a>
-        <a href="dippings.html"><button class="button2">Dippings</button></a>
-        <a href="sidedishes.html"><button class="button2">Side Dishes</button></a>
+        <a href="food.php"><button class="button2">Food</button></a>
+        <a href="drink.php"><button class="button2">Drinks</button></a>
+        <a href="dippings.php"><button class="button2">Dippings</button></a>
+        <a href="sidedishes.php"><button class="button2">Side Dishes</button></a>
         
 
     </div>
@@ -164,10 +164,10 @@
                 <button class="addToCart" onclick="addToCart('Nestea', document.getElementById('nesteaQuantity').value, 50.00, 'images/nestea.jpg')">Add to Cart</button>
             </div>
         </div>
-        
+
     </div>
     <div class="tableNumberContainer" id="tableNumberContainer">
-        <div class="left-half" id="drinksOrders"></div>
+        <div class="left-half" id="Orders"></div>
         <div class="right-half">
             <!-- Your form with the action attribute removed -->
             <form id="orderForm">
