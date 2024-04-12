@@ -26,7 +26,7 @@
         <div class="foodItem porkBelly">
             <img src="images/porkbelly.jpg" alt="Pork Belly">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>Pork Belly</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('porkBelly')">-</button>
                     <input type="number" id="porkBellyQuantity" name="porkBellyQuantity" min="1" max="10" value="1">
@@ -40,7 +40,7 @@
         <div class="foodItem spicyPorkBelly">
             <img src="images/spicyporkbelly.jpg" alt="Spicy Pork Belly">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>Spicy Pork Belly</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('spicyPorkBelly')">-</button>
                     <input type="number" id="spicyPorkBellyQuantity" name="spicyPorkBellyQuantity" min="1" max="10" value="1">
@@ -54,7 +54,7 @@
         <div class="foodItem galbiSauce">
             <img src="images/galbisauce(Pork).jpg" alt="Galbi Sauce (Pork)">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>Galbi Sauce (Pork)</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('galbiSauce')">-</button>
                     <input type="number" id="galbiSauceQuantity" name="galbiSauceQuantity" min="1" max="10" value="1">
@@ -68,7 +68,7 @@
         <div class="foodItem beefBelly">
             <img src="images/beefBelly.jpg" alt="Beef Belly">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>Beef Belly</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('beefBelly')">-</button>
                     <input type="number" id="beefBellyQuantity" name="beefBellyQuantity" min="1" max="10" value="1">
@@ -78,11 +78,11 @@
             </div>
         </div>
 
-        <!-- L.A. Galbi (Beef) -->
+        
         <div class="foodItem laGalbiBeef">
             <img src="images/l.a.galbi(Beef).jpg" alt="L.A. Galbi (Beef)">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>L.A. Galbi (Beef)</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('laGalbiBeef')">-</button>
                     <input type="number" id="laGalbiBeefQuantity" name="laGalbiBeefQuantity" min="1" max="10" value="1">
@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        <!-- Add more food items here similarly -->
+        
 
     </div>
 

@@ -55,7 +55,6 @@
                 <button class="addToCart" onclick="addToCart('Royal', document.getElementById('royalQuantity').value, 70.00, 'images/royal.png')">Add to Cart</button>
             </div>
         </div>
-        <!-- Add similar code for other drink items -->
         <div class="drink smb">
             <img src="images/smb.png" alt="smb">
             <div class="tooltip">
@@ -169,13 +168,14 @@
     <div class="tableNumberContainer" id="tableNumberContainer">
         <div class="left-half" id="Orders"></div>
         <div class="right-half">
-            <!-- Your form with the action attribute removed -->
             <form id="orderForm">
+                <input type="hidden" id="drinkName" name="drinkName">
+                <input type="hidden" id="price" name="price">
+                <input type="number" id="quantity" name="quantity" min="1" value="1" style="display: none;"> <!-- Hidden input for quantity -->
                 <label for="tableNumber" style="margin-right: 40px;">Table Number:</label>
                 <input type="text" id="tableNumber" name="tableNumber" required>
-                <button class="submitOrderButton" type="submit">Submit Order</button>
+                <button type="button" class="submitOrderButton" onclick="submitOrder()">Submit Order</button>
             </form>
-
         <a href="billout.html" ><button class="submitOrderButton">Bill out</button>
         </div>
     </div>      
