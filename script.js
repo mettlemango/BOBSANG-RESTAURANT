@@ -1,3 +1,5 @@
+let orders = JSON.parse(localStorage.getItem('orders')) || [];
+
 // Event listener for the login form submission
 document.getElementById("login-form").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent form submission
@@ -9,7 +11,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     // Authentication logic (replace with actual authentication)
     if (username === "admin" && password === "admin123") {
         // Redirect to reports page upon successful login
-        window.location.href = "reports.html";
+        window.location.href = "inventory.html";
     } else {
         // Display error message for invalid credentials
         document.getElementById("error-message").innerText = "Invalid username or password";

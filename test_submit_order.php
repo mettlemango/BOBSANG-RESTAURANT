@@ -2,8 +2,8 @@
 // Database credentials
 $host = 'localhost';
 $dbname = 'bobsangrestaurant';
-$username = 'root';
-$password = '';
+$username = 'Kyle';
+$password = 'test1234';
 
 try {
     // Attempt to establish a connection to the database
