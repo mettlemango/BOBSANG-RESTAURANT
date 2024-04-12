@@ -102,7 +102,10 @@ function addToCart(itemName, quantity, price) {
 
     // Update the cart UI
     updateCartUI();
+
+    
 }
+
 
 // Function to update the cart UI based on stored cart items
 function updateCartUI() {
@@ -122,7 +125,6 @@ function updateCartUI() {
 window.onload = function() {
     updateCartUI();
 };
-
 // Function to add an item to the left half container
 function addToLeftHalfContainer(itemName, quantity, price) {
     // Create a new div to represent the added item
@@ -197,6 +199,7 @@ function addToLeftHalfContainer(itemName, quantity, price) {
     leftHalfContainer.appendChild(itemDiv);
 }
 
+
 // Function to reduce the quantity of an item in the cart
 function reduceQuantity(itemName) {
     // Get the existing cart items from localStorage
@@ -238,55 +241,47 @@ function deleteFromCart(itemName) {
     updateCartUI();
 }
 
-// Function to handle order submission
+// Function to submit order
 function submitOrder() {
-    var tableNumber = document.getElementById("tableNumber").value;
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    console.log("Submitting order");
+    // Get the cart items from local storage
+    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    var tableNumber = document.getElementById("tableNumber").value;
+    console.log(`Cart items:`, cartItems);
 
     // Iterate through each cart item
     cartItems.forEach(function(item) {
+        console.log(`Submitting order for item: ${item.itemName}, quantity: ${item.quantity}`);
+        
+        // Submit the order for each item (existing functionality)
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "update_stock.php", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-
-        // Create the request data as a JSON object
-        var requestData = {
-            itemName: item.itemName,
-            quantity: item.quantity
-        };
-
-        // Send the AJAX request
-        xhr.send(JSON.stringify(requestData));
-
-        // Handle the response using the xhr.onload function
-        xhr.onload = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    try {
-                        // Attempt to parse JSON response
-                        var responseData = JSON.parse(xhr.responseText);
-                        
-                        // Check if the response contains a success property
-                        if (responseData.success) {
-                            console.log(`Stock updated for ${item.itemName}: ${responseData.message}`);
-                        } else {
-                            console.error(`Failed to update stock for ${item.itemName}: ${responseData.message}`);
-                        }
-                    } catch (error) {
-                        console.error(`Error parsing JSON response:`, error);
-                        console.error(`Response: ${xhr.responseText}`);
-                    }
-                } else {
-                    console.error(`Failed to update stock for ${item.itemName}: ${xhr.statusText}`);
-                }
+        xhr.open("POST", "submit_order.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(`Order submitted for ${item.itemName}: ${xhr.responseText}`);
             }
         };
+
+        // Send AJAX request with item information
+        xhr.send(
+            "itemName=" + item.itemName +
+            "&quantity=" + item.quantity +
+            "&price=" + item.price +
+            "&tableNumber=" + tableNumber
+        );
+
+        // Update the stock for each item in the order
+        console.log(`Updating stock for item: ${item.itemName}`);
+        updateStock(item.itemName, item.quantity);
         
     });
 
-    // Clear the cart and display a confirmation message
+    console.log("Clearing cart and displaying message");
     clearCartAndDisplayMessage();
 }
+
 
 // Function to clear the cart and display a message
 function clearCartAndDisplayMessage() {
@@ -298,6 +293,7 @@ function clearCartAndDisplayMessage() {
     var messageDiv = document.getElementById("message");
     messageDiv.textContent = "Your order has been received. Thank you for dining with us!";
 }
+
 
 // Function to save the order to local storage
 function saveOrderToLocalStorage(tableNumber) {
@@ -351,127 +347,12 @@ function generateReceipt() {
     document.getElementById('billOutButton').style.display = "block"; // Show the "Bill Out" button
 }
 
-function updateStock(itemName, quantity) {
-    console.log(`Updating stock for item: ${itemName} with quantity: ${quantity}`);
-    
-    // Try to retrieve the quantity input element
-    var quantityInput = document.getElementById(itemName);
-    if (!quantityInput) {
-        console.warn(`Quantity input not found for item: ${itemName}`);
-        return; // Early return if quantity input element is not found
-    }
-    
-    // Try to retrieve the current stock element
-    var currentStockElement = document.getElementById('current' + itemName);
-    if (!currentStockElement) {
-        console.warn(`Current stock element not found for item: ${itemName}`);
-        return; // Early return if current stock element is not found
-    }
-
-    // Try to retrieve the span element inside the current stock element
-    var currentStockSpan = currentStockElement.querySelector('span');
-    if (!currentStockSpan) {
-        console.warn(`Current stock span element not found for item: ${itemName}`);
-        return; // Early return if current stock span element is not found
-    }
-
-    // Convert quantities to integers
-    var quantityToUpdate = parseInt(quantity);
-    var currentStockQuantity = parseInt(currentStockSpan.textContent);
-
-    // Calculate the new stock quantity
-    var newStockQuantity = currentStockQuantity - quantityToUpdate;
-
-    // Update the current stock span element with the new quantity
-    currentStockSpan.textContent = newStockQuantity;
-
-    // Optional: You may want to perform further actions here, such as updating the database with the new stock quantity
-
-    console.log(`Updated stock for item: ${itemName}. New quantity: ${newStockQuantity}`);
-    updateStockInDatabase(itemName, newStockQuantity);
+function updateStock(category, item) {
+    const quantityInput = document.getElementById(item);
+    const currentStock = document.getElementById('current' + item).querySelector('span');
+    const quantity = parseInt(quantityInput.value);
+    const currentQuantity = parseInt(currentStock.textContent);
+    const newQuantity = currentQuantity + quantity;
+    currentStock.textContent = newQuantity;
+    quantityInput.value = ''; // Clear input field after updating stock
 }
-
-// Function to update the stock in the database
-function updateStockInDatabase(itemName, newStockQuantity) {
-    // Create a new XMLHttpRequest instance
-    var xhr = new XMLHttpRequest();
-
-    // Configure the request to send data to the server
-    xhr.open("POST", "update_stock.php", true);
-
-    // Set the request header to indicate the request type
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    // Define the callback function for when the request completes
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                // Success - Handle any necessary response data from the server
-                console.log(`Stock updated for item ${itemName}: ${xhr.responseText}`);
-            } else {
-                // Handle any errors
-                console.error(`Failed to update stock for item ${itemName}: ${xhr.statusText}`);
-            }
-        }
-    };
-
-    // Send the request with the item name and new stock quantity as form data
-    xhr.send(`itemName=${encodeURIComponent(itemName)}&newStockQuantity=${encodeURIComponent(newStockQuantity)}`);
-}
-
-// Event listener for form submission to update stock
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector("form");
-    form.addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent form submission and page reload
-
-        // Get form data
-        const formData = new FormData(form);
-        const item = formData.get("item");
-        const quantity = parseInt(formData.get("stock"));
-
-        // Send data to insert.php
-        fetch("insert.php", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Update stock display
-                fetch("fetch_stock.php")
-                    .then(response => response.json())
-                    .then(data => {
-                        const stockDisplay = document.getElementById("stock-display");
-                        stockDisplay.innerHTML = "<h2>Current Stocks</h2>";
-                        stockDisplay.innerHTML += "<ul>";
-                        data.forEach(item => {
-                            stockDisplay.innerHTML += `<li>${item.item}: ${item.stock}</li>`;
-                        });
-                        stockDisplay.innerHTML += "</ul>";
-                    });
-            } else {
-                console.error("Error updating stock:", data.message);
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
-    });
-
-    // Existing code for fetching stock data on page load
-    fetch("fetch_stock.php")
-        .then(response => response.json())
-        .then(data => {
-            const stockDisplay = document.getElementById("stock-display");
-            stockDisplay.innerHTML = "<h2>Current Stocks</h2>";
-            stockDisplay.innerHTML += "<ul>";
-            data.forEach(item => {
-                stockDisplay.innerHTML += `<li>${item.item}: ${item.stock}</li>`;
-            });
-            stockDisplay.innerHTML += "</ul>";
-        })
-        .catch(error => {
-            console.error("Error fetching stock data:", error);
-        });
-});
