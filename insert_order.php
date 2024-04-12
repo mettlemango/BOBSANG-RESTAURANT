@@ -1,9 +1,9 @@
 <?php
 // Database credentials
-$host = 'localhost';
-$dbname = 'bobsangrestaurant';
-$username = 'root';
-$password = '';
+$host = "localhost";
+$dbname = "bobsangrestaurant";
+$username = "root";
+$password = "";
 
 // Connect to the database
 try {
