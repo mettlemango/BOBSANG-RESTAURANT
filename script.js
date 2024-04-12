@@ -1,5 +1,3 @@
-let orders = JSON.parse(localStorage.getItem('orders')) || [];
-
 // Event listener for the login form submission
 document.getElementById("login-form").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent form submission
@@ -11,7 +9,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     // Authentication logic (replace with actual authentication)
     if (username === "admin" && password === "admin123") {
         // Redirect to reports page upon successful login
-        window.location.href = "inventory.html";
+        window.location.href = "reports.html";
     } else {
         // Display error message for invalid credentials
         document.getElementById("error-message").innerText = "Invalid username or password";
@@ -270,16 +268,16 @@ function submitOrder() {
                         
                         // Check if the response contains a success property
                         if (responseData.success) {
-                            console.log(Stock updated for ${item.itemName}: ${responseData.message});
+                            console.log(`Stock updated for ${item.itemName}: ${responseData.message}`);
                         } else {
-                            console.error(Failed to update stock for ${item.itemName}: ${responseData.message});
+                            console.error(`Failed to update stock for ${item.itemName}: ${responseData.message}`);
                         }
                     } catch (error) {
-                        console.error(Error parsing JSON response:, error);
-                        console.error(Response: ${xhr.responseText});
+                        console.error(`Error parsing JSON response:`, error);
+                        console.error(`Response: ${xhr.responseText}`);
                     }
                 } else {
-                    console.error(Failed to update stock for ${item.itemName}: ${xhr.statusText});
+                    console.error(`Failed to update stock for ${item.itemName}: ${xhr.statusText}`);
                 }
             }
         };
@@ -354,26 +352,26 @@ function generateReceipt() {
 }
 
 function updateStock(itemName, quantity) {
-    console.log(Updating stock for item: ${itemName} with quantity: ${quantity});
+    console.log(`Updating stock for item: ${itemName} with quantity: ${quantity}`);
     
     // Try to retrieve the quantity input element
     var quantityInput = document.getElementById(itemName);
     if (!quantityInput) {
-        console.warn(Quantity input not found for item: ${itemName});
+        console.warn(`Quantity input not found for item: ${itemName}`);
         return; // Early return if quantity input element is not found
     }
     
     // Try to retrieve the current stock element
     var currentStockElement = document.getElementById('current' + itemName);
     if (!currentStockElement) {
-        console.warn(Current stock element not found for item: ${itemName});
+        console.warn(`Current stock element not found for item: ${itemName}`);
         return; // Early return if current stock element is not found
     }
 
     // Try to retrieve the span element inside the current stock element
     var currentStockSpan = currentStockElement.querySelector('span');
     if (!currentStockSpan) {
-        console.warn(Current stock span element not found for item: ${itemName});
+        console.warn(`Current stock span element not found for item: ${itemName}`);
         return; // Early return if current stock span element is not found
     }
 
@@ -389,7 +387,7 @@ function updateStock(itemName, quantity) {
 
     // Optional: You may want to perform further actions here, such as updating the database with the new stock quantity
 
-    console.log(Updated stock for item: ${itemName}. New quantity: ${newStockQuantity});
+    console.log(`Updated stock for item: ${itemName}. New quantity: ${newStockQuantity}`);
     updateStockInDatabase(itemName, newStockQuantity);
 }
 
@@ -409,16 +407,16 @@ function updateStockInDatabase(itemName, newStockQuantity) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 // Success - Handle any necessary response data from the server
-                console.log(Stock updated for item ${itemName}: ${xhr.responseText});
+                console.log(`Stock updated for item ${itemName}: ${xhr.responseText}`);
             } else {
                 // Handle any errors
-                console.error(Failed to update stock for item ${itemName}: ${xhr.statusText});
+                console.error(`Failed to update stock for item ${itemName}: ${xhr.statusText}`);
             }
         }
     };
 
     // Send the request with the item name and new stock quantity as form data
-    xhr.send(itemName=${encodeURIComponent(itemName)}&newStockQuantity=${encodeURIComponent(newStockQuantity)});
+    xhr.send(`itemName=${encodeURIComponent(itemName)}&newStockQuantity=${encodeURIComponent(newStockQuantity)}`);
 }
 
 // Event listener for form submission to update stock
@@ -448,7 +446,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         stockDisplay.innerHTML = "<h2>Current Stocks</h2>";
                         stockDisplay.innerHTML += "<ul>";
                         data.forEach(item => {
-                            stockDisplay.innerHTML += <li>${item.item}: ${item.stock}</li>;
+                            stockDisplay.innerHTML += `<li>${item.item}: ${item.stock}</li>`;
                         });
                         stockDisplay.innerHTML += "</ul>";
                     });
@@ -469,7 +467,7 @@ document.addEventListener("DOMContentLoaded", function() {
             stockDisplay.innerHTML = "<h2>Current Stocks</h2>";
             stockDisplay.innerHTML += "<ul>";
             data.forEach(item => {
-                stockDisplay.innerHTML += <li>${item.item}: ${item.stock}</li>;
+                stockDisplay.innerHTML += `<li>${item.item}: ${item.stock}</li>`;
             });
             stockDisplay.innerHTML += "</ul>";
         })
