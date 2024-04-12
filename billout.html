@@ -1,8 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bill Out</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,23 +14,44 @@
         <a href="sidedishes.php"><button class="button2">Side Dishes</button></a>
     </div>
     <div class="div2">
-        <h1 class="headerIntro">Bill Out</h1>
+    <h1>Bill Out</h1>
+    <div id="order-summary">
+        <h2>Order Summary</h2>
+        <div id="order-details"></div>
+        <p>Total: ₱<span id="total-bill">0.00</span></p>
     </div>
-
-    <div class="tableNumberContainer">
-        <form id="tableNumberForm">
-            <label for="tableNumber">Enter Table Number:</label>
-            <input type="text" id="tableNumber" name="tableNumber" required>
-            <button type="button" onclick="generateReceipt()">Generate Receipt</button>
-        </form>
-    </div>
-
-    <div id="receipt-container" style="display: none;">
-        <!-- Receipt content will be dynamically generated here -->
-    </div>
-
-    <div id="cart-items-container"></div>
-    <button id="billOutButton" style="display: none;">Bill Out</button>
-
+    <button id="confirm-payment" onclick="confirmPayment()">Confirm Payment</button>
+    
+    <script>
+        function loadOrderSummary() {
+            const orderDetailsDiv = document.getElementById('order-details');
+            const totalBillSpan = document.getElementById('total-bill');
+            
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            
+            let totalBill = 0;
+            
+            cartItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `${item.itemName} (x${item.quantity}): ₱${(item.price * item.quantity).toFixed(2)}`;
+                
+                orderDetailsDiv.appendChild(itemDiv);
+                
+                totalBill += item.price * item.quantity;
+            });
+            
+            totalBillSpan.textContent = totalBill.toFixed(2);
+        }
+        
+        function confirmPayment() {
+            // Handle payment confirmation here
+            // Clear local storage or other data stores as needed
+            localStorage.removeItem('cartItems');
+            alert('Payment confirmed. Thank you for dining with us!');
+            window.location.href = 'food.php'; // Redirect to starting page or home
+        }
+        
+        window.onload = loadOrderSummary;
+    </script>
 </body>
 </html>

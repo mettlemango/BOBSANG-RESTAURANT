@@ -171,13 +171,11 @@
         <div class="right-half">
             <!-- Your form with the action attribute removed -->
             <form id="orderForm">
-                <input type="hidden" id="drinkName" name="drinkName">
-                <input type="hidden" id="price" name="price">
-                <input type="number" id="quantity" name="quantity" min="1" value="1" style="display: none;"> <!-- Hidden input for quantity -->
                 <label for="tableNumber" style="margin-right: 40px;">Table Number:</label>
                 <input type="text" id="tableNumber" name="tableNumber" required>
-                <button type="button" class="submitOrderButton" onclick="submitOrder()">Submit Order</button>
+                <button class="submitOrderButton" type="submit">Submit Order</button>
             </form>
+
         <a href="billout.html" ><button class="submitOrderButton">Bill out</button>
         </div>
     </div>      
