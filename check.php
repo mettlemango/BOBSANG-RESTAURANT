@@ -24,7 +24,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     if ($result->num_rows > 0) {
         // Valid credentials, redirect to report.html
-        header("Location: report.html");
+        header("Location: inventory.html");
         exit();
     } else {
         // Invalid credentials, display error message
