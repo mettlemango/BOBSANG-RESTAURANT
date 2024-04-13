@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <title>Bill Out</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file if you have one -->
-    <script src="script.js" defer></script> <!-- Link to your JavaScript file -->
+    <script src="script.js" defer></script> <!-- Link to your provided JavaScript file -->
 </head>
 
 <body>
+
     <div class="div2">
         <h1 class="headerIntro">Bill out</h1>
     </div>
@@ -17,7 +18,7 @@
         <!-- Display list of items and their details -->
         <div id="billout-items">
             <h3>Order Summary</h3>
-            <ul id="billout-list"></ul> <!-- List of order items -->
+            <ul id="billout-list"></ul>
         </div>
 
         <!-- Total Bill Display -->
@@ -26,72 +27,33 @@
             <p id="total-bill-amount">₱0.00</p>
         </div>
 
+        <!-- Receipt Container -->
+        <div id="receipt-container">
+            <!-- Receipt details will be displayed here -->
+        </div>
+
         <!-- Clear Cart Button -->
-        <button id="clear-cart-button" class="button2">Bill Out!</button>
+        <button id="clear-cart-button" class="button2">Clear Cart</button>
     </div>
 
     <!-- JavaScript -->
     <script src="script.js" defer></script> <!-- Link to your JavaScript file -->
+    <script>
+        // Ensure the script runs after the DOM is loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            // Load and display billout list and total bill on page load
+            displayBilloutList();
+            var totalBill = calculateTotalBill();
+            document.getElementById("total-bill-amount").textContent = `₱${totalBill.toFixed(2)}`;
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Retrieve order information from local storage
-    const orderInfo = JSON.parse(localStorage.getItem('orderInfo'));
-
-    // Initialize variables
-    let totalBill = 0;
-    let totalPerHead = 0;
-    const totalPricePerPerson = 549; // Assuming a fixed price per person
-
-    // Retrieve the number of people from session storage
-    const numPeople = parseInt(sessionStorage.getItem('numPeople')) || 0;
-
-    // Calculate total per head cost if there are people dining in
-    if (numPeople > 0) {
-        totalPerHead = numPeople * totalPricePerPerson;
-        totalBill += totalPerHead;
-        
-        // Display the cost per head in the order summary
-        const orderSummaryList = document.getElementById("billout-list");
-        const perHeadListItem = document.createElement("li");
-        perHeadListItem.textContent = `Cost per head - Quantity: ${numPeople}, Total: ₱${totalPerHead.toFixed(2)}`;
-        orderSummaryList.appendChild(perHeadListItem);
-    }
-
-    // Display order information and calculate total bill from orders
-    if (orderInfo) {
-        const { set, quantity, totalPrice } = orderInfo;
-
-        // Calculate total bill including the order price
-        totalBill += totalPrice;
-
-        // Display the order information in the order summary in the desired format
-        const orderSummaryList = document.getElementById("billout-list");
-        const listItem = document.createElement("li");
-
-        // Differentiate the order type and format the display accordingly
-        // Check if the set is Set A, Set B, or Shabu Shabu
-        if (set === 'Set A' || set === 'Set B' || set === 'Shabu Shabu') {
-            listItem.textContent = `${set} - Quantity: ${quantity}, Total: ₱${totalPrice.toFixed(2)}`;
-        } else {
-            listItem.textContent = `${set} - Quantity: ${quantity}, Total: ₱${totalPrice.toFixed(2)}`;
-        }
-
-        orderSummaryList.appendChild(listItem);
-    }
-
-    // Display total bill amount
-    document.getElementById("total-bill-amount").textContent = `₱${totalBill.toFixed(2)}`;
-
-    // Add event listener to the clear cart button
-    document.getElementById("clear-cart-button").addEventListener("click", function() {
-        // Clear local storage and optionally redirect to a different page
-        localStorage.removeItem('orderInfo');
-        window.location.href = 'startingPage.html';
-    });
-});
-
-</script>
+            // Add event listener to the clear cart button
+            document.getElementById("clear-cart-button").addEventListener("click", function () {
+                // Clear the cart and optionally redirect to a different page
+                clearCart();
+                window.location.href = 'startingPage.html';
+            });
+        });
+    </script>
 </body>
 
 </html>

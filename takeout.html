@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Takeout</title>
+    <title>Menu</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .dropdown-content {
@@ -14,28 +12,86 @@
 
         /* Change the color of checkbox label text */
         .dropdown-content label {
-            color: #D6CEBA;
-            font-weight: normal;
-        }
-
-        #order-summary {
-            margin-top: 20px;
+            color: #D6CEBA; /* Change this to the desired text color */
+            font-weight: normal; /* Set font weight to normal */
         }
     </style>
-</head>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropdownButtons = document.querySelectorAll(".takeOutButton");
+            dropdownButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    const dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            });
 
+            // Function to limit the number of checkboxes that can be selected
+            function limitCheckboxSelection(checkboxes, maxAllowed) {
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.addEventListener("change", function() {
+                        const checkedCheckboxes = Array.from(checkboxes).filter(function(checkbox) {
+                            return checkbox.checked;
+                        });
+                        if (checkedCheckboxes.length > maxAllowed) {
+                            this.checked = false;
+                        }
+                    });
+                });
+            }
+
+            const meatOptionsSetA = document.querySelectorAll("input[name='meatOptionsSetA']");
+            limitCheckboxSelection(meatOptionsSetA, 3);
+
+            const meatOptionsSetB = document.querySelectorAll("input[name='meatOptionsSetB']");
+            limitCheckboxSelection(meatOptionsSetB, 3);
+
+            const meatOptionsSetC = document.querySelectorAll("input[name='meatOptionsSetC']");
+            limitCheckboxSelection(meatOptionsSetC, 3);
+
+            const orderButtons = document.querySelectorAll(".orderButton");
+            orderButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    const dropdownContent = this.parentElement;
+                    const set = dropdownContent.querySelector("p").textContent.trim();
+                    const quantityInput = dropdownContent.querySelector("input[type='number']");
+                    const quantity = parseInt(quantityInput.value);
+                    let totalPrice = 0;
+
+                    if (set.includes("Set A")) {
+                        totalPrice = 999 * quantity;
+                    } else if (set.includes("Set B")) {
+                        totalPrice = 1399 * quantity;
+                    } else if (set.includes("Shabu Shabu")) {
+                        totalPrice = 1099 * quantity;
+                    }
+
+                    if (quantity > 0) {
+                        alert("Your order has been placed for " + quantity + " of " + set + ". Total price: ₱" + totalPrice);
+                        // Here you can add code to process the order
+                    } else {
+                        alert("Please enter a valid quantity.");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
 <body>
     <div class="div2">
-        <h1 class="headerIntro">Choose your takeout!</h1>
+        <h1 class="headerIntro">Choose your take out!</h1>
         <h2 class="header2Intro">테이크아웃을 선택하세요</h2>
     </div>
     <div class="containerTakeOut">
-        <!-- Dropdown for Set A -->
         <div class="dropdown">
             <button class="takeOutButton">Set A</button>
             <div class="dropdown-content">
-                <p>Set A - ₱999</p>
-                <input type="number" id="setAQuantity" placeholder="Quantity" min="1" step="1">
+                <p>Set A-₱ 999</p>
+                <input type="number" id="setAQuantity" placeholder="Quantity" min="0" step="1">
                 <p><strong>3 Choices of meat (300g each)</strong></p>
                 <label><input type="checkbox" name="meatOptionsSetA" value="beefBelly"> Beef Belly</label>
                 <label><input type="checkbox" name="meatOptionsSetA" value="porkBelly"> Pork Belly</label>
@@ -59,20 +115,18 @@
                 <button class="orderButton">Order</button>
             </div>
         </div>
-
-        <!-- Dropdown for Set B -->
         <div class="dropdown">
             <button class="takeOutButton">Set B</button>
             <div class="dropdown-content">
-                <p>Set B - ₱1399</p>
-                <input type="number" id="setBQuantity" placeholder="Quantity" min="1" step="1">
+                <p>Set B-₱ 1399</p>
+                <input type="number" id="setBQuantity" placeholder="Quantity" min="0" step="1">
                 <p><strong>3 Choices of meat (450g each)</strong></p>
                 <label><input type="checkbox" name="meatOptionsSetB" value="beefBelly"> Beef Belly</label>
                 <label><input type="checkbox" name="meatOptionsSetB" value="porkBelly"> Pork Belly</label>
                 <label><input type="checkbox" name="meatOptionsSetB" value="spicyPork"> Spicy Pork</label>
                 <label><input type="checkbox" name="meatOptionsSetB" value="galbiSauce"> Galbi Sauce (Pork)</label>
-                <label><input type="checkbox" name="meatOptionsSetB" value="laGalbi"> L.A. Galbi (Beef)</label>
-                <p><strong>5 Kinds of Side Dishes</strong></p>
+                <label><input type="checkbox" name="meatOptionsSetB" value="laGalbi"> L.A Galbi (Beef)</label>
+                <p><strong>5 Kinds of Side dishes</strong></p>
                 <ul>
                     <li>Kimchi</li>
                     <li>Japchae</li>
@@ -89,25 +143,22 @@
                 <button class="orderButton">Order</button>
             </div>
         </div>
-
-        <!-- Dropdown for Shabu Shabu -->
         <div class="dropdown">
-            <button class="takeOutButton">Shabu Shabu</button>
+            <button class="takeOutButton">SHABU SHABU</button>
             <div class="dropdown-content">
-                <p>Shabu Shabu Take Out - ₱1099</p>
-                <input type="number" id="shabuQuantity" placeholder="Quantity" min="1" step="1">
-                <p><strong>Shabu Shabu ingredients</strong></p>
+                <p>Shabu Shabu Take Out-₱1099</p>
+                <input type="number" id="shabuQuantity" placeholder="Quantity" min="0" step="1">
                 <ul>
                     <li>Baguio Pechay</li>
                     <li>6 PCS Balls</li>
                     <li>Taiwan Pechay</li>
-                    <li>3 PCS Dumplings</li>
+                    <li>3 PCS Dumpling</li>
                     <li>Broccoli</li>
                     <li>Tomato</li>
                     <li>2 Kinds of Fresh Mushroom</li>
                     <li>Condiments</li>
                     <li>Sweet Corn</li>
-                    <li>5 Kinds of Side Dishes</li>
+                    <li>5 Kind of Side Dish</li>
                     <li>Sweet Potato</li>
                     <li>Glass Noodles</li>
                     <li>450g Beef</li>
@@ -118,79 +169,5 @@
             </div>
         </div>
     </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Handle dropdown toggle
-    const dropdownButtons = document.querySelectorAll(".takeOutButton");
-    dropdownButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            const dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    });
-
-    // Function to limit checkbox selection
-    function limitCheckboxSelection(checkboxes, maxAllowed) {
-        checkboxes.forEach(function (checkbox) {
-            checkbox.addEventListener("change", function () {
-                const checkedCheckboxes = Array.from(checkboxes).filter(function (checkbox) {
-                    return checkbox.checked;
-                });
-                if (checkedCheckboxes.length > maxAllowed) {
-                    this.checked = false;
-                }
-            });
-        });
-    }
-
-    const meatOptionsSetA = document.querySelectorAll("input[name='meatOptionsSetA']");
-    limitCheckboxSelection(meatOptionsSetA, 3);
-
-    const meatOptionsSetB = document.querySelectorAll("input[name='meatOptionsSetB']");
-    limitCheckboxSelection(meatOptionsSetB, 3);
-
-    const orderButtons = document.querySelectorAll(".orderButton");
-    orderButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            const dropdownContent = this.parentElement;
-            const set = dropdownContent.querySelector("p").textContent;
-            const quantityInput = dropdownContent.querySelector("input[type='number']");
-            const quantity = parseInt(quantityInput.value);
-            let totalPrice = 0;
-
-            if (set.includes("Set A")) {
-                totalPrice = 999 * quantity;
-            } else if (set.includes("Set B")) {
-                totalPrice = 1399 * quantity;
-            } else if (set.includes("Shabu Shabu")) {
-                totalPrice = 1099 * quantity;
-            }
-
-            if (quantity > 0) {
-                // Store order information in local storage
-                const orderInfo = {
-                    set: set.trim(),
-                    quantity: quantity,
-                    totalPrice: totalPrice
-                };
-
-                // Store order information in local storage
-                localStorage.setItem('orderInfo', JSON.stringify(orderInfo));
-                
-                // Redirect to billout.html
-                window.location.href = 'billout.html';
-            } else {
-                alert("Please enter a valid quantity.");
-            }
-        });
-    });
-});
-</script>
-
 </body>
 </html>
