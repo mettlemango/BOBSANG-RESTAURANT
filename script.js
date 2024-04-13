@@ -317,9 +317,11 @@ function sendOrdersToServer(tableNumber, orders) {
             }
         };
 
+        // Send the request to the server
         xhr.send(JSON.stringify(requestData));
     });
 }
+
 
 // Function to calculate the total bill for hidden cart items
 function calculateTotalBill() {
