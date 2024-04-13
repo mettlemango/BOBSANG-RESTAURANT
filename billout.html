@@ -1,36 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bill Out</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file if you have one -->
+    <script src="script.js" defer></script> <!-- Link to your provided JavaScript file -->
 </head>
+
 <body>
-    <div class="sidebar">
-        <a href="food.php"><button class="button2">Food</button></a>
-        <a href="drink.php"><button class="button2">Drinks</button></a>
-        <a href="dippings.php"><button class="button2">Dippings</button></a>
-        <a href="sidedishes.php"><button class="button2">Side Dishes</button></a>
-    </div>
+
     <div class="div2">
-        <h1 class="headerIntro">Bill Out</h1>
+        <h1 class="headerIntro">Bill out</h1>
+    </div>
+    <!-- Main container for Bill Out -->
+    <div id="billout-container" class="billOut">
+        <!-- Display list of items and their details -->
+        <div id="billout-items">
+            <h3>Order Summary</h3>
+            <ul id="billout-list"></ul>
+        </div>
+
+        <!-- Total Bill Display -->
+        <div id="total-bill-container">
+            <h3>Total Bill</h3>
+            <p id="total-bill-amount">₱0.00</p>
+        </div>
+
+        <!-- Receipt Container -->
+        <div id="receipt-container">
+            <!-- Receipt details will be displayed here -->
+        </div>
+
+        <!-- Clear Cart Button -->
+        <button id="clear-cart-button" class="button2">Clear Cart</button>
     </div>
 
-    <div class="tableNumberContainer">
-        <form id="tableNumberForm">
-            <label for="tableNumber">Enter Table Number:</label>
-            <input type="text" id="tableNumber" name="tableNumber" required>
-            <button type="button" onclick="generateReceipt()">Generate Receipt</button>
-        </form>
-    </div>
+    <!-- JavaScript -->
+    <script src="script.js" defer></script> <!-- Link to your JavaScript file -->
+    <script>
+        // Ensure the script runs after the DOM is loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            // Load and display billout list and total bill on page load
+            displayBilloutList();
+            var totalBill = calculateTotalBill();
+            document.getElementById("total-bill-amount").textContent = `₱${totalBill.toFixed(2)}`;
 
-    <div id="receipt-container" style="display: none;">
-        <!-- Receipt content will be dynamically generated here -->
-    </div>
-
-    <div id="cart-items-container"></div>
-    <button id="billOutButton" style="display: none;">Bill Out</button>
-
+            // Add event listener to the clear cart button
+            document.getElementById("clear-cart-button").addEventListener("click", function () {
+                // Clear the cart and optionally redirect to a different page
+                clearCart();
+                window.location.href = 'startingPage.html';
+            });
+        });
+    </script>
 </body>
+
 </html>

@@ -55,36 +55,20 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
 });
 
 // Function to add an item to the cart
+// Modify addToCart to include isHidden property
 function addToCart(itemName, quantity, price) {
     // Calculate total price
     var totalPrice = price * parseInt(quantity);
-
-    // Check if the item already exists in the cart
-    var existingCartItem = document.querySelector('.left-half .cart-item[data-item="' + itemName + '"]');
-
-    if (existingCartItem) {
-        // If the item already exists, update its quantity and total price
-        var quantitySpan = existingCartItem.querySelector('.quantity');
-        var currentQuantity = parseInt(quantitySpan.textContent);
-        var newQuantity = currentQuantity + parseInt(quantity);
-        quantitySpan.textContent = newQuantity;
-
-        // Update the total price for the existing item
-        var totalPriceSpan = existingCartItem.querySelector('.total-price');
-        totalPriceSpan.textContent = '₱' + (price * newQuantity).toFixed(2);
-    } else {
-        // If the item does not exist, create a new item in the cart
-        addToLeftHalfContainer(itemName, quantity, price);
-    }
 
     // Create or update the cart item object
     var cartItem = {
         itemName: itemName,
         quantity: parseInt(quantity),
-        price: price
+        price: price,
+        isHidden: false // Add isHidden property, initially set to false (visible)
     };
 
-    // Get the existing cart items from localStorage or create an empty array
+    // Get existing cart items from local storage
     var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
     // Check if the item already exists in the cart
@@ -93,33 +77,54 @@ function addToCart(itemName, quantity, price) {
     });
 
     if (existingCartItemIndex !== -1) {
-        // If the item already exists, update its quantity
+        // If the item already exists, update its quantity and isHidden status
         cartItems[existingCartItemIndex].quantity += parseInt(quantity);
+        cartItems[existingCartItemIndex].isHidden = false;
     } else {
         // If the item does not exist, add it to the cart
         cartItems.push(cartItem);
     }
 
-    // Store the updated cart items in localStorage
+    // Store the updated cart items in local storage
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
     // Update the cart UI
     updateCartUI();
 }
 
-// Function to update the cart UI based on stored cart items
+// Function to hide cart items in the UI
+function hideCartItems() {
+    // Get cart items from local storage
+    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    // Update the isHidden property to true for all cart items
+    cartItems.forEach(function(item) {
+        item.isHidden = true;
+    });
+
+    // Save the updated cart items back to local storage
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+    // Call updateCartUI to refresh the UI based on the visibility status
+    updateCartUI();
+}
+
+// Modify updateCartUI to only display items that are not hidden
 function updateCartUI() {
     var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     var leftHalfContainer = document.querySelector('.left-half');
 
-    // Clear existing cart items
+    // Clear existing cart items from the left half container
     leftHalfContainer.innerHTML = '';
 
-    // Loop through cart items and add them to the UI
+    // Loop through cart items and add them to the UI only if they are not hidden
     cartItems.forEach(function(item) {
-        addToLeftHalfContainer(item.itemName, item.quantity, item.price);
+        if (!item.isHidden) {
+            addToLeftHalfContainer(item.itemName, item.quantity, item.price);
+        }
     });
 }
+
 
 // Call updateCartUI when the page loads to populate the cart
 window.onload = function() {
@@ -246,44 +251,125 @@ function submitOrder() {
     var tableNumber = document.getElementById("tableNumber").value;
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
+    // Create or retrieve table orders from local storage
+    var tableOrders = JSON.parse(localStorage.getItem('tableOrders')) || {};
+
+    if (!tableOrders[tableNumber]) {
+        tableOrders[tableNumber] = [];
+    }
+
+    // Accumulate orders for the specific table
     cartItems.forEach(function(item) {
-        // Prepare data to send to the server
-        var requestData = {
+        tableOrders[tableNumber].push({
             itemName: item.itemName,
             quantity: item.quantity,
-            price: item.price,
+            price: item.price
+        });
+    });
+
+    // Save updated table orders back to local storage
+    localStorage.setItem('tableOrders', JSON.stringify(tableOrders));
+
+    // Hide the cart items
+    hideCartItems();
+
+    // Enable the "Bill Out" button and display it
+    var billOutButton = document.getElementById("billOutButton");
+    billOutButton.style.display = "block";
+}
+
+// Add event listener for form submission
+document.getElementById("orderForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    submitOrder();
+});
+
+
+// Usage:
+// Call the hideCartItems() function whenever you want to hide the cart items, e.g., after an order submission.
+
+
+function sendOrdersToServer(tableNumber, orders) {
+    orders.forEach(function(order) {
+        var requestData = {
+            itemName: order.itemName,
+            quantity: order.quantity,
+            price: order.price,
             tableNumber: tableNumber
         };
 
-        // Create a new XMLHttpRequest to send data to insert_order.php
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "insert_order.php", true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        // Handle server response
         xhr.onload = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    // Parse JSON response from server
                     var responseData = JSON.parse(xhr.responseText);
                     if (responseData.success) {
-                        console.log(`Order for ${item.itemName} submitted successfully.`);
+                        console.log(`Order for ${order.itemName} submitted successfully.`);
                     } else {
-                        console.error(`Failed to submit order for ${item.itemName}: ${responseData.message}`);
+                        console.error(`Failed to submit order for ${order.itemName}: ${responseData.message}`);
                     }
                 } else {
-                    console.error(`Failed to submit order for ${item.itemName}: ${xhr.statusText}`);
+                    console.error(`Failed to submit order for ${order.itemName}: ${xhr.statusText}`);
                 }
             }
         };
 
-        // Send the request with the JSON data
         xhr.send(JSON.stringify(requestData));
     });
-
-    // Clear the cart and display a confirmation message
-    clearCartAndDisplayMessage();
 }
+
+// Function to calculate the total bill for hidden cart items
+function calculateTotalBill() {
+    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    var totalBill = 0;
+
+    // Loop through cart items and sum up the total price for hidden items
+    cartItems.forEach(function(item) {
+        if (item.isHidden) {
+            totalBill += item.quantity * item.price;
+        }
+    });
+
+    return totalBill;
+}
+
+// Function to generate and display the receipt
+function generateReceipt() {
+    var receiptContainer = document.getElementById('receipt-container');
+    var totalBill = calculateTotalBill();
+    var tableNumber = document.getElementById('tableNumber').value;
+
+    // Create receipt content
+    var receiptContent = "<h2>Receipt</h2>";
+    receiptContent += "<p>Table Number: " + tableNumber + "</p>";
+    receiptContent += "<p>Total Bill: ₱" + totalBill.toFixed(2) + "</p>";
+    receiptContent += "<p>Thank you for dining with us!</p>";
+
+    // Display the receipt in the designated area
+    receiptContainer.innerHTML = receiptContent;
+}
+
+// Function to clear the cart from local storage
+function clearCart() {
+    // Clear cart items from local storage
+    localStorage.removeItem("cartItems");
+}
+
+// Event listener for the "Bill Out" button
+document.getElementById("billOutButton").addEventListener("click", function() {
+    // Generate the receipt
+    generateReceipt();
+    
+    // Clear the cart after the receipt is generated
+    clearCart();
+    
+    // Optionally, you can redirect the user to a different page or refresh the page
+    window.location.reload();
+});
+
 
 
 // Function to clear the cart and display a message
@@ -334,20 +420,6 @@ window.onload = function() {
     displayOrders(orders);
 };
 
-function generateReceipt() {
-    var receiptContainer = document.getElementById('receipt-container');
-    var totalBill = calculateTotalBill();
-    var tableNumber = document.getElementById('tableNumber').value; // Retrieve the table number inputted by the customer
-
-    var receiptContent = "<h2>Receipt</h2>";
-    receiptContent += "<p>Table Number: " + tableNumber + "</p>"; // Include the table number in the receipt
-    receiptContent += "<p>Total Bill: PHP " + totalBill.toFixed(2) + "</p>";
-    receiptContent += "<p>Thank you for dining with us!</p>";
-
-    receiptContainer.innerHTML = receiptContent;
-    receiptContainer.style.display = "block";
-    document.getElementById('billOutButton').style.display = "block"; // Show the "Bill Out" button
-}
 
 function updateStock(itemName, quantity) {
     console.log(`Updating stock for item: ${itemName} with quantity: ${quantity}`);
@@ -472,5 +544,36 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => {
             console.error("Error fetching stock data:", error);
         });
+});
+
+// Function to display the billout list of items in the billout page
+function displayBilloutList() {
+    var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    var billoutList = document.getElementById('billout-list');
+
+    // Clear the existing list
+    billoutList.innerHTML = '';
+
+    // Iterate through cart items and add them to the billout list
+    cartItems.forEach(function(item) {
+        if (item.isHidden) {
+            // Calculate total price for the item
+            var totalPrice = item.price * item.quantity;
+
+            // Create a list item element
+            var listItem = document.createElement('li');
+
+            // Set the content of the list item to show the item name, quantity, and total price
+            listItem.innerHTML = `${item.itemName} - Quantity: ${item.quantity}, Total: ₱${totalPrice.toFixed(2)}`;
+
+            // Append the list item to the billout list
+            billoutList.appendChild(listItem);
+        }
+    });
+}
+
+// Call the function when the page loads
+window.addEventListener("DOMContentLoaded", function () {
+    displayBilloutList();
 });
 

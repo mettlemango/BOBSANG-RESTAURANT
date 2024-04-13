@@ -1,9 +1,6 @@
 <?php
 // Database credentials
-$host = "localhost";
-$dbname = "bobsangrestaurant";
-$username = "root";
-$password = "";
+require_once 'database.php';
 
 // Function to validate and sanitize data
 function sanitize_data($data) {

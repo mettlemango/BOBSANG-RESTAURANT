@@ -532,3 +532,25 @@ a:hover {
 .sidebar:hover button {
     visibility: visible; /* Display buttons when sidebar is hovered */
 }
+
+.billOut {
+    color: #D6CEBA ;
+    background-color: #39241B;
+    width: 600px;
+    height: 300px;
+    margin: 0 auto; /* Center the container horizontally */
+    position: relative; /* Make the container relative for the absolute positioning of the button */
+    padding: 10px;
+}
+
+.billOut button {
+    font-weight: bold;
+    position: absolute; /* Use absolute positioning */
+    bottom: 10px; /* Place the button near the bottom with a margin */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%); /* Adjust the button's position to center it */
+    width: 200px;
+    height: 50px;
+}
+
+
