@@ -246,37 +246,29 @@ function deleteFromCart(itemName) {
     updateCartUI();
 }
 
-// Function to handle order submission
 function submitOrder() {
+    // Get the table number from the input
     var tableNumber = document.getElementById("tableNumber").value;
+    
+    // Retrieve cart items from local storage
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    // Create or retrieve table orders from local storage
-    var tableOrders = JSON.parse(localStorage.getItem('tableOrders')) || {};
-
-    if (!tableOrders[tableNumber]) {
-        tableOrders[tableNumber] = [];
-    }
-
-    // Accumulate orders for the specific table
-    cartItems.forEach(function(item) {
-        tableOrders[tableNumber].push({
-            itemName: item.itemName,
-            quantity: item.quantity,
-            price: item.price
-        });
-    });
-
-    // Save updated table orders back to local storage
-    localStorage.setItem('tableOrders', JSON.stringify(tableOrders));
-
-    // Hide the cart items
-    hideCartItems();
-
-    // Enable the "Bill Out" button and display it
-    var billOutButton = document.getElementById("billOutButton");
-    billOutButton.style.display = "block";
+    
+    // Send orders to the server
+    sendOrdersToServer(tableNumber, cartItems);
+    
+    // After submitting orders to the server, you can perform additional tasks, such as:
+    // - Clearing the cart
+    // - Updating the UI
+    // - Displaying a success message
+    
+    // Clear the cart after submitting the orders
+    localStorage.removeItem("cartItems");
+    
+    // Display a success message
+    var messageDiv = document.getElementById("message");
+    messageDiv.textContent = `Order has been successfully submitted for table ${tableNumber}!`;
 }
+
 
 // Add event listener for form submission
 document.getElementById("orderForm").addEventListener("submit", function(event) {
