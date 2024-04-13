@@ -26,13 +26,13 @@
         <div class="foodItem porkBelly">
             <img src="images/porkbelly.jpg" alt="Pork Belly">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>Pork Belly</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('porkBelly')">-</button>
                     <input type="number" id="porkBellyQuantity" name="porkBellyQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('porkBelly')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Pork Belly', document.getElementById('porkBellyQuantity').value, 70.00, 'images/porkbelly.jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Pork Belly', document.getElementById('porkBellyQuantity').value, 0.00, 'images/porkbelly.jpg')">Add to Cart</button>
             </div>
         </div>
 
@@ -40,13 +40,13 @@
         <div class="foodItem spicyPorkBelly">
             <img src="images/spicyporkbelly.jpg" alt="Spicy Pork Belly">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>Spicy Pork Belly</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('spicyPorkBelly')">-</button>
                     <input type="number" id="spicyPorkBellyQuantity" name="spicyPorkBellyQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('spicyPorkBelly')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Spicy Pork Belly', document.getElementById('spicyPorkBellyQuantity').value, 70.00, 'images/spicyporkbelly.jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Spicy Pork Belly', document.getElementById('spicyPorkBellyQuantity').value, 0.00, 'images/spicyporkbelly.jpg')">Add to Cart</button>
             </div>
         </div>
 
@@ -54,13 +54,13 @@
         <div class="foodItem galbiSauce">
             <img src="images/galbisauce(Pork).jpg" alt="Galbi Sauce (Pork)">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>Galbi Sauce (Pork)</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('galbiSauce')">-</button>
                     <input type="number" id="galbiSauceQuantity" name="galbiSauceQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('galbiSauce')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Galbi Sauce (Pork)', document.getElementById('galbiSauceQuantity').value, 70.00, 'images/galbisauce(Pork).jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Galbi Sauce (Pork)', document.getElementById('galbiSauceQuantity').value, 0.00, 'images/galbisauce(Pork).jpg')">Add to Cart</button>
             </div>
         </div>
 
@@ -68,13 +68,13 @@
         <div class="foodItem beefBelly">
             <img src="images/beefBelly.jpg" alt="Beef Belly">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>Beef Belly</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('beefBelly')">-</button>
                     <input type="number" id="beefBellyQuantity" name="beefBellyQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('beefBelly')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Beef Belly', document.getElementById('beefBellyQuantity').value, 70.00, 'images/beefBelly.jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Beef Belly', document.getElementById('beefBellyQuantity').value, 0.00, 'images/beefBelly.jpg')">Add to Cart</button>
             </div>
         </div>
 
@@ -82,27 +82,23 @@
         <div class="foodItem laGalbiBeef">
             <img src="images/l.a.galbi(Beef).jpg" alt="L.A. Galbi (Beef)">
             <div class="tooltip">
-                <p>Price: ₱70.00</p>
+                <p>L.A. Galbi (Beef)</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('laGalbiBeef')">-</button>
                     <input type="number" id="laGalbiBeefQuantity" name="laGalbiBeefQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('laGalbiBeef')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('L.A. Galbi (Beef)', document.getElementById('laGalbiBeefQuantity').value, 70.00, 'images/l.a.galbi(Beef).jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('L.A. Galbi (Beef)', document.getElementById('laGalbiBeefQuantity').value, 0.00, 'images/l.a.galbi(Beef).jpg')">Add to Cart</button>
             </div>
         </div>
-
-        <!-- Add more food items here similarly -->
-
     </div>
-
     <div class="tableNumberContainer" id="tableNumberContainer">
         <div class="left-half" id="drinksOrders"></div>
         <div class="right-half">
             <form id="orderForm">
                 <label for="tableNumber" style="margin-right: 40px;">Table Number:</label>
                 <input type="text" id="tableNumber" name="tableNumber" required>
-                <button class="submitOrderButton" type="submit">Submit Order</button>
+                <button class="submitOrderButton" onclick="submitOrder()">Submit Order</button>
             </form>
             <a href="billout.html"><button class="submitOrderButton">Bill out</button></a>
         </div>
