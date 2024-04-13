@@ -104,7 +104,7 @@
                 <input type="hidden" id="price" name="price">
                 <label for="tableNumber" style="margin-right: 40px;">Table Number:</label>
                 <input type="text" id="tableNumber" name="tableNumber" required>
-                <button class="submitOrderButton" onclick="submitOrder()">Submit Order</button>
+                <button class="submitOrderButton" type="submit">Submit Order</button>
             </form>
             <a href="billout.html"><button class="submitOrderButton">Bill out</button></a>
         </div>
