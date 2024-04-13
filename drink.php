@@ -40,7 +40,7 @@
                     <input type="number" id="pineappleJuiceQuantity" name="pineappleJuiceQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('pineappleJuice')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Pineapple Juice', document.getElementById('pineappleJuiceQuantity').value, '₱60.00', 'images/pineappleJuice.png')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Pineapple Juice', document.getElementById('pineappleJuiceQuantity').value, 60.00, 'images/pineappleJuice.png')">Add to Cart</button>
             </div>
         </div>
         <div class="drink royal">
@@ -161,7 +161,7 @@
                     <input type="number" id="nesteaQuantity" name="nesteaQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('nestea')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Nestea', document.getElementById('nesteaQuantity').value, 50.00, 'images/nestea.jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Nestea', document.getElementById('nesteaQuantity').value, 0.00, 'images/nestea.jpg')">Add to Cart</button>
             </div>
         </div>
 
@@ -171,14 +171,11 @@
         <div class="right-half">
             <!-- Your form with the action attribute removed -->
             <form id="orderForm">
-                <input type="hidden" id="drinkName" name="drinkName">
-                <input type="hidden" id="price" name="price">
-                <input type="number" id="quantity" name="quantity" min="1" value="1" style="display: none;"> <!-- Hidden input for quantity -->
                 <label for="tableNumber" style="margin-right: 40px;">Table Number:</label>
                 <input type="text" id="tableNumber" name="tableNumber" required>
                 <button type="button" class="submitOrderButton" onclick="submitOrder()">Submit Order</button>
             </form>
-        <a href="billout.html" ><button class="submitOrderButton">Bill out</button>
+        <a href="billout.html" ><button class="submitOrderButton">Bill out</button></a>
         </div>
     </div>      
 

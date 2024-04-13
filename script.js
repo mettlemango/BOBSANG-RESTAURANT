@@ -1,5 +1,3 @@
-let orders = JSON.parse(localStorage.getItem('orders')) || [];
-
 
 // Event listener for the login form submission
 document.getElementById("login-form").addEventListener("submit", function(event) {
@@ -131,8 +129,40 @@ window.onload = function() {
     updateCartUI();
 };
 
+// Function to get the image source based on item name
+function getImageSrc(itemName) {
+    var jpgSrc = 'images/' + itemName.toLowerCase().replace(/\s/g, '') + '.jpg';
+    var pngSrc = 'images/' + itemName.toLowerCase().replace(/\s/g, '') + '.png';
+    // Check if jpg image exists, if not, return png image source
+    if (checkImageExists(jpgSrc)) {
+        return jpgSrc;
+    } else if (checkImageExists(pngSrc)) {
+        return pngSrc;
+    } else {
+        return 'images/default.jpg'; // Default image source if neither jpg nor png is found
+    }
+}
+
+// Function to check if an image exists
+function checkImageExists(imageSrc) {
+    var http = new XMLHttpRequest();
+    http.open('HEAD', imageSrc, false);
+    http.send();
+    return http.status !== 404;
+}
+
+
 // Function to add an item to the left half container
 function addToLeftHalfContainer(itemName, quantity, price) {
+    // Ensure price is a number
+    price = parseFloat(price);
+    
+    // Check if price is a valid number
+    if (isNaN(price)) {
+        console.error(`Invalid price for ${itemName}:`, price);
+        return;
+    }
+
     // Create a new div to represent the added item
     var itemDiv = document.createElement('div');
     itemDiv.classList.add('cart-item');
@@ -144,40 +174,21 @@ function addToLeftHalfContainer(itemName, quantity, price) {
     var itemImage = document.createElement('img');
     itemImage.src = getImageSrc(itemName);
     itemImage.alt = itemName;
-    itemImage.style.width = '50px'; // Adjust the width of the image
-    itemImage.style.height = 'auto'; // Maintain aspect ratio
+    itemImage.style.width = '50px';
+    itemImage.style.height = 'auto';
     itemDiv.appendChild(itemImage);
-
-    // Function to get the image source based on item name
-    function getImageSrc(itemName) {
-        var jpgSrc = 'images/' + itemName.toLowerCase().replace(/\s/g, '') + '.jpg';
-        var pngSrc = 'images/' + itemName.toLowerCase().replace(/\s/g, '') + '.png';
-        // Check if jpg image exists, if not, return png image source
-        if (checkImageExists(jpgSrc)) {
-            return jpgSrc;
-        } else if (checkImageExists(pngSrc)) {
-            return pngSrc;
-        } else {
-            return 'images/default.jpg'; // Default image source if neither jpg nor png is found
-        }
-    }
-
-    // Function to check if an image exists
-    function checkImageExists(imageSrc) {
-        var http = new XMLHttpRequest();
-        http.open('HEAD', imageSrc, false);
-        http.send();
-        return http.status !== 404;
-    }
 
     // Create a paragraph element for the item name and quantity
     var itemNameQuantity = document.createElement('p');
     itemNameQuantity.innerHTML = itemName + ' (Quantity: <span class="quantity">' + quantity + '</span>)';
     itemDiv.appendChild(itemNameQuantity);
 
+    // Calculate total price
+    var totalPrice = (price * quantity).toFixed(2);
+
     // Create a paragraph element for the item price and total price
     var itemPrice = document.createElement('p');
-    itemPrice.innerHTML = 'Price: ₱' + price.toFixed(2) + ' | Total Price: <span class="total-price">₱' + (price * quantity).toFixed(2) + '</span>';
+    itemPrice.innerHTML = 'Price: ₱' + price.toFixed(2) + ' | Total Price: <span class="total-price">₱' + totalPrice + '</span>';
     itemDiv.appendChild(itemPrice);
 
     // Create a button to reduce the quantity
@@ -199,11 +210,12 @@ function addToLeftHalfContainer(itemName, quantity, price) {
     itemDiv.appendChild(deleteButton);
 
     // Get the left-half container
-    var leftHalfContainer = document.querySelector('.left-half'); // Selecting the left-half container
+    var leftHalfContainer = document.querySelector('.left-half');
 
     // Append the item div to the left-half container
     leftHalfContainer.appendChild(itemDiv);
 }
+
 
 // Function to reduce the quantity of an item in the cart
 function reduceQuantity(itemName) {
@@ -249,25 +261,25 @@ function deleteFromCart(itemName) {
 function submitOrder() {
     // Get the table number from the input
     var tableNumber = document.getElementById("tableNumber").value;
-    
+
     // Retrieve cart items from local storage
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    
+
     // Send orders to the server
     sendOrdersToServer(tableNumber, cartItems);
-    
-    // After submitting orders to the server, you can perform additional tasks, such as:
-    // - Clearing the cart
-    // - Updating the UI
-    // - Displaying a success message
-    
-    // Clear the cart after submitting the orders
-    localStorage.removeItem("cartItems");
-    
+
+    // Clear the cart after submitting the orders and updating the stock
+    hideCartItems();
+
     // Display a success message
     var messageDiv = document.getElementById("message");
     messageDiv.textContent = `Order has been successfully submitted for table ${tableNumber}!`;
+
+    // Optionally, you can redirect the user or refresh the page
+    window.location.reload();
+    
 }
+
 
 
 // Add event listener for form submission
@@ -281,38 +293,66 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
 // Call the hideCartItems() function whenever you want to hide the cart items, e.g., after an order submission.
 
 
-function sendOrdersToServer(tableNumber, orders) {
-    orders.forEach(function(order) {
-        var requestData = {
+// Function to send orders to the server and update stock
+async function sendOrdersToServer(tableNumber, orders) {
+    // Helper function to send POST request to server
+    // The function definition has already been placed at the top
+
+    // Send each order to the server
+    for (const order of orders) {
+        const requestData = {
             itemName: order.itemName,
             quantity: order.quantity,
             price: order.price,
-            tableNumber: tableNumber
+            tableNumber: tableNumber,
         };
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "insert_order.php", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-
-        xhr.onload = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    var responseData = JSON.parse(xhr.responseText);
-                    if (responseData.success) {
-                        console.log(`Order for ${order.itemName} submitted successfully.`);
-                    } else {
-                        console.error(`Failed to submit order for ${order.itemName}: ${responseData.message}`);
-                    }
-                } else {
-                    console.error(`Failed to submit order for ${order.itemName}: ${xhr.statusText}`);
-                }
+        try {
+            // Send POST request to insert_order.php
+            const insertResponse = await sendPostRequest('insert_order.php', requestData);
+            if (insertResponse.success) {
+                console.log(`Order for ${order.itemName} submitted successfully.`);
+            } else {
+                console.error(`Failed to submit order for ${order.itemName}: ${insertResponse.message}`);
             }
+        } catch (error) {
+            console.error(`An error occurred: ${error.message}`);
+        }
+    }
+
+    // Aggregate quantities to avoid sending multiple requests for the same item
+    const stockUpdates = {};
+
+    for (const order of orders) {
+        if (!stockUpdates[order.itemName]) {
+            stockUpdates[order.itemName] = 0;
+        }
+        stockUpdates[order.itemName] += order.quantity;
+    }
+
+    // Send stock updates to the server
+    for (const itemName in stockUpdates) {
+        const updateStockData = {
+            itemName: itemName,
+            quantity: stockUpdates[itemName],
         };
 
-        // Send the request to the server
-        xhr.send(JSON.stringify(requestData));
-    });
+        try {
+            // Send POST request to update_stock.php
+            const stockResponse = await sendPostRequest('update_stock.php', updateStockData);
+            if (stockResponse.success) {
+                console.log(`Stock updated for ${itemName}: ${stockResponse.message}`);
+            } else {
+                console.error(`Failed to update stock for ${itemName}: ${stockResponse.message}`);
+            }
+        } catch (error) {
+            console.error(`An error occurred: ${error.message}`);
+        }
+    }
 }
+
+
+
 
 
 // Function to calculate the total bill for hidden cart items
@@ -414,75 +454,6 @@ window.onload = function() {
     displayOrders(orders);
 };
 
-
-function updateStock(itemName, quantity) {
-    console.log(`Updating stock for item: ${itemName} with quantity: ${quantity}`);
-    
-    // Try to retrieve the quantity input element
-    var quantityInput = document.getElementById(itemName);
-    if (!quantityInput) {
-        console.warn(`Quantity input not found for item: ${itemName}`);
-        return; // Early return if quantity input element is not found
-    }
-    
-    // Try to retrieve the current stock element
-    var currentStockElement = document.getElementById('current' + itemName);
-    if (!currentStockElement) {
-        console.warn(`Current stock element not found for item: ${itemName}`);
-        return; // Early return if current stock element is not found
-    }
-
-    // Try to retrieve the span element inside the current stock element
-    var currentStockSpan = currentStockElement.querySelector('span');
-    if (!currentStockSpan) {
-        console.warn(`Current stock span element not found for item: ${itemName}`);
-        return; // Early return if current stock span element is not found
-    }
-
-    // Convert quantities to integers
-    var quantityToUpdate = parseInt(quantity);
-    var currentStockQuantity = parseInt(currentStockSpan.textContent);
-
-    // Calculate the new stock quantity
-    var newStockQuantity = currentStockQuantity - quantityToUpdate;
-
-    // Update the current stock span element with the new quantity
-    currentStockSpan.textContent = newStockQuantity;
-
-    // Optional: You may want to perform further actions here, such as updating the database with the new stock quantity
-
-    console.log(`Updated stock for item: ${itemName}. New quantity: ${newStockQuantity}`);
-    updateStockInDatabase(itemName, newStockQuantity);
-}
-
-// Function to update the stock in the database
-function updateStockInDatabase(itemName, newStockQuantity) {
-    // Create a new XMLHttpRequest instance
-    var xhr = new XMLHttpRequest();
-
-    // Configure the request to send data to the server
-    xhr.open("POST", "update_stock.php", true);
-
-    // Set the request header to indicate the request type
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    // Define the callback function for when the request completes
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                // Success - Handle any necessary response data from the server
-                console.log(`Stock updated for item ${itemName}: ${xhr.responseText}`);
-            } else {
-                // Handle any errors
-                console.error(`Failed to update stock for item ${itemName}: ${xhr.statusText}`);
-            }
-        }
-    };
-
-    // Send the request with the item name and new stock quantity as form data
-    xhr.send(`itemName=${encodeURIComponent(itemName)}&newStockQuantity=${encodeURIComponent(newStockQuantity)}`);
-}
-
 // Event listener for form submission to update stock
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector("form");
@@ -570,4 +541,34 @@ function displayBilloutList() {
 window.addEventListener("DOMContentLoaded", function () {
     displayBilloutList();
 });
+
+// Function to send POST request to server
+async function sendPostRequest(url, data) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    return response.json();
+}
+function addItemToCart(itemName, quantity, itemPrice) {
+    // Convert the quantity to an integer
+    quantity = parseInt(quantity);
+
+    // Validate quantity
+    if (isNaN(quantity) || quantity <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+
+    // Add the item to the cart using local storage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push({ itemName, quantity, itemPrice });
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Navigate to the billout.html page
+    window.location.href = 'billout.html';
+}
 
