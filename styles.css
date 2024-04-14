@@ -537,7 +537,7 @@ a:hover {
     color: #D6CEBA ;
     background-color: #39241B;
     width: 600px;
-    height: 300px;
+    height: 550px;
     margin: 0 auto; /* Center the container horizontally */
     position: relative; /* Make the container relative for the absolute positioning of the button */
     padding: 10px;

@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 };
 
                 // Store order information in local storage
-                localStorage.setItem('orderInfo', JSON.stringify(orderInfo));
+                sessionStorage.setItem('orderInfo', JSON.stringify(orderInfo));
                 
                 // Redirect to billout.html
                 window.location.href = 'billout.html';

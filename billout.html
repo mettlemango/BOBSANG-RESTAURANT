@@ -33,7 +33,7 @@
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     // Initialize total bill variable
     let totalBill = 0;
 
@@ -45,8 +45,25 @@
         billoutList.appendChild(listItem);
     }
 
-    // Retrieve takeout order information from localStorage
-    const takeoutOrderInfo = JSON.parse(localStorage.getItem('orderInfo'));
+    // Retrieve dine-in cart information from local storage
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    // Loop through each dine-in cart item and add them to the order summary
+    cartItems.forEach(item => {
+        const { itemName, quantity, price } = item;
+
+        // Calculate total for this item
+        const itemTotal = quantity * price;
+
+        // Display dine-in item in the order summary
+        displayItemInSummary(itemName, quantity, itemTotal);
+
+        // Add dine-in item total to overall total bill
+        totalBill += itemTotal;
+    });
+
+    // Retrieve takeout order information from session storage
+    const takeoutOrderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
 
     if (takeoutOrderInfo) {
         const { set, quantity, totalPrice } = takeoutOrderInfo;
@@ -58,34 +75,19 @@
         totalBill += totalPrice;
     }
 
-    // Retrieve dine-in cart information from sessionStorage
-    const dineInCart = JSON.parse(sessionStorage.getItem('dineInCart')) || [];
+    // **New code to handle per head cost**
 
-    // Loop through each dine-in cart item and add them to the order summary
-    dineInCart.forEach(item => {
-        const { description, quantity, price } = item;
+    // Retrieve per head total price from session storage
+    const perHeadCost = parseFloat(sessionStorage.getItem('totalPrice')) || 0;
 
-        // Calculate total for this item
-        const itemTotal = quantity * price;
+    // Add per head total price to overall total bill
+    totalBill += perHeadCost;
 
-        // Display dine-in item in the order summary
-        displayItemInSummary(description, quantity, itemTotal);
-
-        // Add dine-in item total to overall total bill
-        totalBill += itemTotal;
-    });
-
-    // Calculate additional cost per head if applicable
-    const numPeople = parseInt(sessionStorage.getItem('numPeople')) || 0;
-    const pricePerPerson = 549; // Assuming a fixed price per person
-
-    if (numPeople > 0) {
-        const totalPerHead = numPeople * pricePerPerson;
-        totalBill += totalPerHead;
-
-        // Display cost per head in the order summary
-        displayItemInSummary(`Cost per head`, numPeople, totalPerHead);
-    }
+    // **Display per head cost in the order summary**
+    const billoutList = document.getElementById("billout-list");
+    const perHeadCostItem = document.createElement("li");
+    perHeadCostItem.textContent = `Per Head Cost: ₱${perHeadCost.toFixed(2)}`;
+    billoutList.appendChild(perHeadCostItem);
 
     // Display the total bill amount
     document.getElementById("total-bill-amount").textContent = `₱${totalBill.toFixed(2)}`;
@@ -93,17 +95,21 @@
     // Add event listener to clear cart button
     document.getElementById("clear-cart-button").addEventListener("click", function() {
         if (confirm("Are you sure you want to clear the cart and return to the starting page?")) {
-            // Clear takeout order information from localStorage
-            localStorage.removeItem('orderInfo');
+            // Clear dine-in cart information from local storage
+            localStorage.removeItem('cartItems');
 
-            // Clear dine-in cart information from sessionStorage
-            sessionStorage.removeItem('dineInCart');
+            // Clear takeout order information from session storage
+            sessionStorage.removeItem('orderInfo');
+
+            // Clear per head cost information from session storage
+            sessionStorage.removeItem('totalPrice');
 
             // Redirect to startingPage.html
             window.location.href = 'startingPage.html';
         }
     });
 });
+
 
     </script>
 </body>
