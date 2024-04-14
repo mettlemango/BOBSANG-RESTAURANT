@@ -19,6 +19,7 @@
 
     <div class="div2">
         <h1 class="headerIntro">Dippings</h1>
+        <h2 class="headerIntro">딥핑 소스</h1>
     </div>
 
     <div class="containerDineIn">

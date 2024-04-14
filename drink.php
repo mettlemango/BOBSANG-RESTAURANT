@@ -17,6 +17,7 @@
     </div>
     <div class="div2">
         <h1 class="headerIntro">Drinks</h1>
+        <h2 class="header2Intro">음료</h2>
     </div>
     <div class="containerDineIn">
         <div class="drink coke">

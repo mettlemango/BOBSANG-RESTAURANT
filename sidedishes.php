@@ -19,6 +19,7 @@
 
     <div class="div2">
         <h1 class="headerIntro">Choose Your Side Dishes</h1>
+        <h2 class="header2Intro">부수를 선택하세요</h2>
     </div>
 
     <div class="containerDineIn">

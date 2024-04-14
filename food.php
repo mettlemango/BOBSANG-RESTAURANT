@@ -12,6 +12,7 @@
 <body>
     <div class="div2">
         <h1 class="headerIntro">Unlimited Pork/Beef</h1>
+        <h2 class="header2Intro">무제한 돼지고기/쇠고기</h2>
     </div>
 
     <div class="sidebar" onmouseover="expandSidebar()" onmouseout="collapseSidebar()">
