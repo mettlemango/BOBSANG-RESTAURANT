@@ -38,6 +38,11 @@
     </style>
 </head>
 <body>
+    <div class="sidebar" onmouseover="expandSidebar()" onmouseout="collapseSidebar()">
+        <a href="admin_orders.php"><button class="button2">Orders</button></a>
+        <a href="inventory.php"><button class="button2">Inventory</button></a>
+        <a href="report.php"><button class="button2">Report</button></a>        
+    </div>
     <div class="inventory-container">
         <h1>Inventory Management</h1>
             <form action="insert.php" method="post">

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monthly Orders Report</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             background-color: #D6CEBA;
@@ -54,6 +55,11 @@
     </style>
 </head>
 <body>
+<div class="sidebar" onmouseover="expandSidebar()" onmouseout="collapseSidebar()">
+        <a href="admin_orders.php"><button class="button2">Orders</button></a>
+        <a href="inventory.php"><button class="button2">Inventory</button></a>
+        <a href="report.php"><button class="button2">Report</button></a>        
+    </div>
 
     <?php
     // Database credentials

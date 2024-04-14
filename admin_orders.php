@@ -14,9 +14,9 @@
         <h1>Admin Orders</h1>
     </div>
     <div class="sidebar" onmouseover="expandSidebar()" onmouseout="collapseSidebar()">
-        <a href="food.php"><button class="button2">Food</button></a>
-        <a href="drink.php"><button class="button2">Drinks</button></a>
-        <a href="dippings.php"><button class="button2">Dippings</button></a>        
+        <a href="admin_orders.php"><button class="button2">Orders</button></a>
+        <a href="inventory.php"><button class="button2">Inventory</button></a>
+        <a href="report.php"><button class="button2">Report</button></a>        
     </div>
 
     <div class="container">
