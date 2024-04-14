@@ -27,7 +27,7 @@
         <div class="sideDish kimchi">
             <img src="images/kimchi.jpg" alt="Kimchi">
             <div class="tooltip">
-                <p>Price: ₱20.00</p>
+                <p>Kimchi</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('kimchi')">-</button>
                     <input type="number" id="kimchiQuantity" name="kimchiQuantity" min="1" max="10" value="1">
@@ -41,7 +41,7 @@
         <div class="sideDish japchae">
             <img src="images/japchae.jpg" alt="Japchae">
             <div class="tooltip">
-                <p>Price: ₱20.00</p>
+                <p>Japchae</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('japchae')">-</button>
                     <input type="number" id="japchaeQuantity" name="japchaeQuantity" min="1" max="10" value="1">
@@ -55,7 +55,7 @@
         <div class="sideDish salad">
             <img src="images/salad.jpg" alt="Salad">
             <div class="tooltip">
-                <p>Price: ₱15.00</p>
+                <p>Salad</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('salad')">-</button>
                     <input type="number" id="saladQuantity" name="saladQuantity" min="1" max="10" value="1">
@@ -69,7 +69,7 @@
         <div class="sideDish odeng">
             <img src="images/odeng.jpg" alt="Odeng">
             <div class="tooltip">
-                <p>Price: ₱18.00</p>
+                <p>Odeng</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('odeng')">-</button>
                     <input type="number" id="odengQuantity" name="odengQuantity" min="1" max="10" value="1">
@@ -83,7 +83,7 @@
         <div class="sideDish sweetPotato">
             <img src="images/sweetpotato.jpg" alt="Sweet Potato">
             <div class="tooltip">
-                <p>Price: ₱10.00</p>
+                <p>Sweet Potato</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('sweetPotato')">-</button>
                     <input type="number" id="sweetPotatoQuantity" name="sweetPotatoQuantity" min="1" max="10" value="1">
