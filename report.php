@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +16,7 @@
             height: 100vh;
         }
         
-        h2 {
+        h1 {
             font-size: 50px;
             color: #D6CEBA;
             background-color: #39241B;
@@ -26,6 +25,14 @@
             -webkit-text-stroke-color: #39241B;
             margin: 5px;
             padding: 10px;
+        
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #39241B;
+            margin-top: 0;
+            margin-bottom: 20px;
         }
         
         .box-container {
@@ -33,12 +40,11 @@
             padding: 20px;
             margin: 20px;
         }
-        
-        .box {
-            background-color: #fbeee0;
-            border: 2px solid #422800;
+
+        /* Add border around the month's orders table */
+        .month-orders {
+            border: 4px solid black; /* Change border color to black and increase width */
             border-radius: 10px;
-            box-shadow: #422800 4px 4px 0 0;
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -62,8 +68,6 @@
     $password = "";
     $dbname = "bobsangrestaurant";
 
-
-
     try {
         // Connect to the database
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -78,11 +82,15 @@
         $stmt->bindParam(':month', $currentMonth);
         $stmt->bindParam(':year', $currentYear);
         $stmt->execute();
+
+        // Fetch all rows
         $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Display the orders
-        echo "<div style='border: 1px solid #ccc; padding: 10px; margin: 20px;'>";
-        echo "<h2>Orders for " . date('F Y') . "</h2>";
+        echo "<div class='box-container'>";
+        echo "<h1>Bobsang's Monthly Report</h1>";
+        echo "<h2>April {$currentYear}</h2>";
+        echo "<div class='month-orders'>"; // Adding the month-orders class here
         if (count($orders) > 0) {
             echo "<ul>";
             foreach ($orders as $order) {
@@ -90,11 +98,15 @@
             }
             echo "</ul>";
         } else {
-            echo "<p>No orders found for this month.</p>";
+            echo "<p>No orders found for April {$currentYear}.</p>";
         }
-        echo "</div>";
+        echo "</div>"; // Closing the month-orders div
+        echo "</div>"; // Closing the box-container div
 
     } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        echo "Error executing SQL query: " . $e->getMessage();
     }
     ?>
+
+</body>
+</html>
