@@ -6,11 +6,17 @@
     <title>Admin Orders</title>
     <!-- Include any necessary CSS styles -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
     <div class="header">
         <h1>Admin Orders</h1>
+    </div>
+    <div class="sidebar" onmouseover="expandSidebar()" onmouseout="collapseSidebar()">
+        <a href="food.php"><button class="button2">Food</button></a>
+        <a href="drink.php"><button class="button2">Drinks</button></a>
+        <a href="dippings.php"><button class="button2">Dippings</button></a>        
     </div>
 
     <div class="container">
