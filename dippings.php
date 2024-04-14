@@ -26,13 +26,13 @@
         <div class="dipping cheeseDip">
             <img src="images/cheesedip.jpg" alt="Cheese Dip">
             <div class="tooltip">
-                <p>Price: ₱20.00</p>
+                <p>Cheese Dip</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('cheese')">-</button>
                     <input type="number" id="cheeseQuantity" name="cheeseQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('cheese')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Cheese Dip', document.getElementById('cheeseQuantity').value, 20.00, 'images/cheesedip.jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Cheese Dip', document.getElementById('cheeseQuantity').value, 0.00, 'images/cheesedip.jpg')">Add to Cart</button>
             </div>
         </div>
 
@@ -40,13 +40,13 @@
         <div class="dipping ssamjang">
             <img src="images/ssamjang.jpg" alt="Ssamjang">
             <div class="tooltip">
-                <p>Price: ₱15.00</p>
+                <p>Ssamjang</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('ssamjang')">-</button>
                     <input type="number" id="ssamjangQuantity" name="ssamjangQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('ssamjang')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Ssamjang', document.getElementById('ssamjangQuantity').value, 15.00, 'images/ssamjang.jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Ssamjang', document.getElementById('ssamjangQuantity').value, 0.00, 'images/ssamjang.jpg')">Add to Cart</button>
             </div>
         </div>
 
@@ -54,13 +54,13 @@
         <div class="dipping sesameOilSalt">
             <img src="images/sesameoilsalt.jpg" alt="SesameOilSalt">
             <div class="tooltip">
-                <p>Price: ₱10.00</p>
+                <p>Sesame Oil Salt</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('sesameOilSalt')">-</button>
                     <input type="number" id="sesameOilSaltQuantity" name="sesameOilSaltQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('sesameOilSalt')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('SesameOilSalt', document.getElementById('sesameOilSaltQuantity').value, 10.00, 'images/sesameoilsalt.jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Sesame Oil Salt', document.getElementById('sesameOilSaltQuantity').value, 0.00, 'images/sesameoilsalt.jpg')">Add to Cart</button>
             </div>
         </div>
 
@@ -68,13 +68,13 @@
         <div class="dipping lettuceWrap">
             <img src="images/lettucewrap.jpg" alt="Lettuce Wrap">
             <div class="tooltip">
-                <p>Price: ₱25.00</p>
+                <p>Lettuce Wrap</p>
                 <div class="quantitySelector">
                     <button class="decrement" onclick="decreaseQuantity('lettuceWrap')">-</button>
                     <input type="number" id="lettuceWrapQuantity" name="lettuceWrapQuantity" min="1" max="10" value="1">
                     <button class="increment" onclick="increaseQuantity('lettuceWrap')">+</button>
                 </div>
-                <button class="addToCart" onclick="addToCart('Lettuce Wrap', document.getElementById('lettuceWrapQuantity').value, 25.00, 'images/lettucewrap.jpg')">Add to Cart</button>
+                <button class="addToCart" onclick="addToCart('Lettuce Wrap', document.getElementById('lettuceWrapQuantity').value, 0.00, 'images/lettucewrap.jpg')">Add to Cart</button>
             </div>
         </div>
 
