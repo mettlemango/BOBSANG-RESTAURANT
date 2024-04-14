@@ -15,7 +15,7 @@
     </div>
     <div class="sidebar" onmouseover="expandSidebar()" onmouseout="collapseSidebar()">
         <a href="admin_orders.php"><button class="button2">Orders</button></a>
-        <a href="inventory.php"><button class="button2">Inventory</button></a>
+        <a href="inventory.html"><button class="button2">Inventory</button></a>
         <a href="report.php"><button class="button2">Report</button></a>        
     </div>
 
